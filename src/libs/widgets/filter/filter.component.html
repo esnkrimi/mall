@@ -43,9 +43,9 @@
             selected
             class="p-1"
             (click)="trackFilter()"
-            *ngFor="let item of rangeData"
-            [value]="item[filter.name]"
-            >{{ item[filter.name] }}</mat-option
+            *ngFor="let item of filterData"
+            [value]="item"
+            >{{ item }}</mat-option
           >
         </mat-select>
       </form>

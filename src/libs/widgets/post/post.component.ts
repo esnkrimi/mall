@@ -99,7 +99,7 @@ export class PostComponent implements OnChanges, AfterViewInit {
     {
       postfix: 'میلون تومان ',
       title: 'درآمد ماهیانه',
-      field: 'income',
+      field: 'price',
     },
     {
       postfix: '',
@@ -120,32 +120,32 @@ export class PostComponent implements OnChanges, AfterViewInit {
     {
       postfix: '',
       title: 'رنگ چشم',
-      field: 'eye',
+      field: 'brand',
     },
     {
       postfix: '',
       title: 'رنگ مو',
-      field: 'hair',
+      field: 'color',
     },
     {
       postfix: '',
       title: 'اهل نوشیدنی',
-      field: 'drink',
+      field: 'scent',
     },
     {
       postfix: '',
       title: 'دخانیات',
-      field: 'smoke',
+      field: 'sx',
     },
     {
       postfix: '',
       title: 'سطح مذهبی',
-      field: 'region',
+      field: 'country',
     },
     {
       postfix: '',
       title: 'رابطه باز',
-      field: 'openrelation',
+      field: 'discount',
     },
     {
       postfix: 'سانتی متر',
@@ -248,7 +248,7 @@ export class PostComponent implements OnChanges, AfterViewInit {
       this.attributesOfData.push({
         postfix: 'سانتی متر',
         title: 'کاپ سینه',
-        field: 'bra',
+        field: 'sizes',
       });
   }
   loadingProgressDynamic(handle: string) {

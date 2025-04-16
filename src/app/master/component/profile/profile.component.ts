@@ -155,7 +155,7 @@ export class ProfileComponent implements OnInit {
     }
     this.http
       .post(
-        'https://burjcrown.com/drm/date/index.php?id=11&email=' +
+        'https://burjcrown.com/drm/mall/index.php?id=11&email=' +
           this.userLogined.email,
         formData
       )

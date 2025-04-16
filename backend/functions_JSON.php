@@ -48,7 +48,7 @@ function fetchAllMessagesByParameter($con, $sender, $receiver)
 
 function fetchFilters($con)
 {
-    $filters = ['hair', 'eye', 'glass', 'bra', 'tatto', 'smoke', 'drink', 'region', 'openrelation', 'car', 'house', 'sport'];
+    $filters = ['color', 'brand', 'sizes', 'material', 'sx', 'scent', 'country', 'discount'];
     $resultArray = array();
     for ($i = 0; $i < 12; $i++) {
         $row = null;
@@ -59,7 +59,8 @@ function fetchFilters($con)
     }
     $t = json_encode($resultArray);
     if (strlen($t) != 2)
-        echo $t;
+        ;
+    echo $t;
 
 }
 function fetchFilter($con, $filter)
@@ -68,7 +69,11 @@ function fetchFilter($con, $filter)
     $sql = "SELECT distinct $filter FROM exp"; //echo $sql;
     if ($result = $con->QUERY_RUN($con, $sql)) {
         while ($row = $result->fetch_object()) {
-            array_push($tempArray, $row);
+            $r1 = explode(",", $row->$filter);
+            for ($i = 0; $i < count($r1); $i++) {
+                if (!in_array($r1[$i], $tempArray))
+                    array_push($tempArray, $r1[$i]);
+            }
         }
     }
     return $tempArray;
@@ -764,49 +769,29 @@ function submitPost($con)
     $title = $_GET['title'];
     $sx = $_GET['sx'];
     $content = $_GET['content'];
-    $age = $_GET['age'];
-    $height = $_GET['height'];
-    $weight = $_GET['weight'];
-    $hair = $_GET['hair'];
-    $eye = $_GET['eye'];
-    $glass = $_GET['glass'];
-    $bra = $_GET['bra'];
-    $typeInterrested = $_GET['typeInterrested'];
-    $waist = $_GET['waist'];
-    $hips = $_GET['hips'];
-    $arm = $_GET['arm'];
-    $armpit = $_GET['armpit'];
-    $income = $_GET['income'];
-    $taigh = $_GET['taigh'];
-    $tatto = $_GET['tatto'];
-    $smoke = $_GET['smoke'];
-    $drink = $_GET['drink'];
-    $region = $_GET['region'];
-    $openrelation = $_GET['openrelation'];
-    $mainattr = $_GET['mainattr'];
-    $car = $_GET['car'];
-    $house = $_GET['house'];
-    $sport = $_GET['sport'];
-    $cityid = $_GET['cityid'];
-    $age = $_GET['age'];
+    $color = $_GET['color'];
+    $brand = $_GET['brand'];
+    $sizes = $_GET['sizes'];
+    $price = $_GET['price'];
+    $material = $_GET['material'];
+    $scent = $_GET['scent'];
+    $country = $_GET['country'];
+    $discount = $_GET['discount'];
 
     $date = date("YmdHis");
     $expid = $con->GET_MAX_COL('exp', 'id');
 
 
 
-    $sql = "insert into exp values($expid,$userid,$groupid,'$title','$content','$date',1,'$sx','$height','$weight','$hair','$eye','$glass','$bra','$waist','$hips','$arm','$armpit','$income','$taigh','$tatto','$smoke','$drink','$region','$openrelation','$mainattr','$car','$house','$sport','$typeInterrested','$cityid','$age',0)";
-    //echo $sql;
-
-
-
-
+    $sql = "insert into exp values($expid,$userid,$groupid,'$title','$content','$date',1,'$color','$brand','$sizes','$price','$material','$sx','$scent','$country','$discount')";
+    echo $sql;
     $con->QUERY_RUN($con, $sql);
     for ($i = 0; $i < count($cat); $i++) {
         $id = $con->GET_MAX_COL('exp_category', 'id');
         $catId = findCatIdByName($con, $cat[$i]);
         if ($catId != '') {
-            $sql = "insert into exp_category values($id,$expid,$catId)"; //echo $sql;
+            $sql = "insert into exp_category values($id,$expid,$catId)";
+            echo $sql;
             $con->QUERY_RUN($con, $sql);
         }
     }
@@ -1128,12 +1113,16 @@ function fetch_experiences($con)
     if ($filter) {
         for ($i = 0; $i < count($filter); $i++) {
             $cond .= ' and ';
-            if ((!$filter[$i]->value)) {
-                $cond .= $filter[$i]->name . '<=' . $filter[$i]->valueMax . " and " . $filter[$i]->name . '>=' . $filter[$i]->valueMin;
-            } else {
-                $cond .= $filter[$i]->name . "='" . $filter[$i]->value . "'";
+            if (strcmp($filter[$i]->name, "price") == 0)
+                if ((!$filter[$i]->value)) {
+                    $cond .= $filter[$i]->name . '<=' . $filter[$i]->valueMax . " and " . $filter[$i]->name . '>=' . $filter[$i]->valueMin;
+                } else {
+                    $cond .= $filter[$i]->name . "='" . $filter[$i]->value . "'";
+                } else {
+                $cond .= $filter[$i]->name . " like '%" . $filter[$i]->value . "%'";
             }
         }
+
     }
     if (strcmp($seed, 'public') != 0) {
         if (strcmp($userEmail, 'undefined') != 0)
@@ -1154,7 +1143,6 @@ function fetch_experiences($con)
         echo $t;
     else
         echo ('[{"finish":"yes"}]');
-
 }
 
 

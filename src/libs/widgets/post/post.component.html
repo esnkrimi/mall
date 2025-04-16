@@ -63,7 +63,7 @@
                       <span (click)="addUserDestination(item?.email)">
                         <img
                           [src]="
-                            'https://burjcrown.com/drm/date/users/' +
+                            'https://burjcrown.com/drm/mall/users/' +
                             item?.email +
                             '/user.jpg'
                           "
@@ -179,7 +179,7 @@
           <img
             (click)="
               imageZoom(
-                'https://burjcrown.com/drm/date/users/' +
+                'https://burjcrown.com/drm/mall/users/' +
                   data?.user?.email +
                   '/' +
                   data?.id +
@@ -188,7 +188,7 @@
             "
             onerror="this.src = '../../../../assets/img/unknown-user.png'"
             [src]="
-              'https://burjcrown.com/drm/date/users/' +
+              'https://burjcrown.com/drm/mall/users/' +
               data?.user?.email +
               '/' +
               data?.id +
@@ -206,7 +206,7 @@
             <img
               [routerLink]="['feature/profile/' + data?.user?.email]"
               [src]="
-                'https://burjcrown.com/drm/date/users/' +
+                'https://burjcrown.com/drm/mall/users/' +
                 data?.user?.email +
                 '/user.jpg'
               "

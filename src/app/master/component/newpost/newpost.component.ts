@@ -37,30 +37,15 @@ export class NewpostComponent implements OnInit {
     title: new FormControl('', Validators.required),
     category: new FormControl(''),
     content: new FormControl('', Validators.required),
-    sx: new FormControl('female'),
-    age: new FormControl(50),
-    height: new FormControl('170'),
-    weight: new FormControl('70'),
-    hair: new FormControl('مشکی'),
-    eye: new FormControl('مشکی'),
-    glass: new FormControl('مجرد'),
-    bra: new FormControl('A'),
-    typeInterrested: new FormControl(['کلاسیک']),
-    waist: new FormControl('100'),
-    hips: new FormControl('100'),
-    arm: new FormControl('60'),
-    armpit: new FormControl('60'),
-    income: new FormControl('10'),
-    taigh: new FormControl('100'),
-    tatto: new FormControl('بدون تتو'),
-    smoke: new FormControl('اصلا'),
-    drink: new FormControl('اصلا'),
-    region: new FormControl('معتدل باشد'),
-    openrelation: new FormControl('موافق باشد'),
-    mainattr: new FormControl(''),
-    car: new FormControl(''),
-    house: new FormControl('آپارتمان'),
-    sport: new FormControl(''),
+    color: new FormControl('مشکی'),
+    brand: new FormControl('مشکی'),
+    sizes: new FormControl('A'),
+    price: new FormControl('10'),
+    material: new FormControl('بدون تتو'),
+    sx: new FormControl('اصلا'),
+    scent: new FormControl('اصلا'),
+    country: new FormControl('معتدل باشد'),
+    discount: new FormControl('موافق باشد'),
     cityid: new FormControl(''),
     provinceid: new FormControl(''),
   });
@@ -230,6 +215,7 @@ export class NewpostComponent implements OnInit {
     for (let i = 0; i < this.myFiles.length; i++) {
       formData.append('file[]', this.myFiles[i]);
     }
+    console.log(this.formNewPost.value)
 
     this.store.dispatch(
       actions.prepareToSubmitPost({

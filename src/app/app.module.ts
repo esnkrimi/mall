@@ -66,7 +66,7 @@ export function detectWidth() {
     },
     {
       provide: 'BAASEURL',
-      useValue: 'https://burjcrown.com/drm/exp/index.php',
+      useValue: 'https://burjcrown.com/mall/exp/index.php',
     },
   ],
   bootstrap: [AppComponent],

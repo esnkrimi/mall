@@ -5,495 +5,209 @@
   <app-loadingProgressDynamic
     *ngIf="loadingProgress === 'step changed'"
   ></app-loadingProgressDynamic>
-  <!-- 
-  <div>
-    <img
-    [src]="'../../../../assets/img/img-newpost/s' + 1 + '.jpg'"
-    class="img-newpost"
-    />
-  </div>
-  -->
   <form [formGroup]="formNewPost" class="w-100">
     <ng-container>
-      <div class="animation-fadein field-div">
-        <label class="bg-gorgeous-color text-creamy w-100 p-2">
-          جنسیت شما</label
-        >
-        <div class="d-flex justify-flex-right w-100">
-          <div class="d-flex text-right p-4">
-            <div class="w-75 p-3 text-center">
-              <img
-                src="../../../../assets/img/girl.png"
-                [class.opacity-low]="sexSelected !== 'female'"
-                (click)="setSex('female')"
-                class="img-medum rounded cursor-pointer mr-auto"
-              />
-            </div>
-            <div class="w-75 p-3 text-center">
-              <img
-                src="../../../../assets/img/boy.png"
-                [class.opacity-low]="sexSelected !== 'male'"
-                (click)="setSex('male')"
-                class="img-medum rounded cursor-pointer mr-auto"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="d-relative">
-
         <div>
           <app-loadingProgressDynamic
-          *ngIf="loadingProgress === 'sex changed'"
+            *ngIf="loadingProgress === 'sex changed'"
           ></app-loadingProgressDynamic>
         </div>
-      <div *ngIf="sexSelected !== ''">
-        <div class="animation-fadein field-div">
-          <label class="bg-gorgeous-color text-creamy w-100 p-2"> تایپ</label>
-          <mat-select formControlName="group">
-            <mat-option
-              *ngFor="let item of groupCats"
-              selected
-              [value]="item.id"
-              >{{ item.title }}</mat-option
-            >
-          </mat-select>
-        </div>
-        <div class="w-100" class="animation-fadein field-div">
-          <label class="bg-gorgeous-color text-creamy w-100 p-2"> استان</label>
-          <mat-select
-            formControlName="provinceid"
-            [(ngModel)]="provinceidSelected"
-          >
-            <mat-option
-              (click)="changeProvince(provinceidSelected)"
-              *ngFor="let item of provinces"
-              selected
-              [value]="item.province_id"
-              >{{ item.province }}</mat-option
-            >
-          </mat-select>
-        </div>
-        <div class="w-100" class="animation-fadein field-div">
-          <label class="bg-gorgeous-color text-creamy w-100 p-2"> شهر</label>
-          <mat-select formControlName="cityid">
-            <mat-option
-              *ngFor="let item of cities"
-              selected
-              [value]="item.id"
-              >{{ item.city }}</mat-option
-            >
-          </mat-select>
-        </div>
-        <div class="animation-fadein field-div">
-          <input
-            #title
-            id="title"
-            matInput
-            maxlength="20"
-            placeholder="نام واقعی یا مستعار شما"
-            formControlName="title"
-          />
-        </div>
-        <div class="animation-fadein field-div">
-          <mat-select formControlName="glass">
-            <mat-option value="مجرد"> مجرد</mat-option>
-            <mat-option selected value="تجربه زندگی">تجربه زندگی</mat-option>
-          </mat-select>
-        </div>
-        <div class="animation-fadein field-div">
-          <div>
+        <div>
+          <div class="animation-fadein field-div">
+            <label class="bg-gorgeous-color text-creamy w-100 p-2"> تایپ</label>
+            <mat-select formControlName="group">
+              <mat-option
+                *ngFor="let item of groupCats"
+                selected
+                [value]="item.id"
+                >{{ item.title }}</mat-option
+              >
+            </mat-select>
+          </div>
+          <div class="animation-fadein field-div">
             <input
-              placeholder="از چه تگی برای خود استفاده میکنید؟قد بلند - بلوند یا غیره"
+              #title
+              id="title"
               matInput
-              formControlName="category"
-              *ngIf="selectedCategory?.length <= 5"
+              maxlength="20"
+              placeholder="عنوان"
+              formControlName="title"
             />
           </div>
-          <div class="d-relative parent-result bg-gorgeous-color mb-2">
-            <div class="d-result-absolute bg-blueblack">
-              <ng-container *ngIf="categories[0]">
-                <div
-                  class="p-2 cursor-pointer links bg-gorgeous-color"
-                  *ngFor="let item of categories"
-                  (click)="makeCategory(item.name)"
+          <div class="animation-fadein field-div">
+            <div>
+              <input
+                placeholder="برچسب ها"
+                matInput
+                formControlName="category"
+                *ngIf="selectedCategory?.length <= 5"
+              />
+            </div>
+            <div class="d-relative parent-result bg-gorgeous-color mb-2">
+              <div class="d-result-absolute bg-blueblack">
+                <ng-container *ngIf="categories[0]">
+                  <div
+                    class="p-2 cursor-pointer links bg-gorgeous-color"
+                    *ngFor="let item of categories"
+                    (click)="makeCategory(item.name)"
+                  >
+                    {{ item.name }}
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+
+            <div class="p-2 mt-2 mb-2">
+              <ng-container *ngFor="let item of selectedCategorySet">
+                <span
+                  *ngIf="item !== ''"
+                  (click)="removeFromCategory(item)"
+                  class="text-dark p-1 m-1 bg-light-pink pr-3 pl-3 rounded links"
                 >
-                  {{ item.name }}
-                </div>
+                  {{ item }}
+                </span>
               </ng-container>
             </div>
           </div>
 
-          <div class="p-2 mt-2 mb-2">
-            <ng-container *ngFor="let item of selectedCategorySet">
-              <span
-                *ngIf="item !== ''"
-                (click)="removeFromCategory(item)"
-                class="text-dark p-1 m-1 bg-light-pink pr-3 pl-3 rounded links"
-              >
-                {{ item }}
-              </span>
-            </ng-container>
+          <div class="animation-fadein field-div">
+            <label class="bg-gorgeous-color text-creamy w-100 p-2"> برند</label>
+            <input
+              #brand
+              id="brand"
+              matInput
+              placeholder="برند"
+              formControlName="brand"
+            />
           </div>
-        </div>
-        <!-- -->
-        <div class="animation-fadein field-div">
-          <h3 class="p-2 m-1 text-white">سن</h3>
-          <mat-slider
-            min="18"
-            max="121"
-            step="1"
-            showTickMarks
-            discrete
-            [displayWith]="formatLabelAge"
-          >
-            <input
-              matSliderThumb
-              #age
-              id="age"
-              matInput
-              formControlName="age"
-            />
-          </mat-slider>
-        </div>
-        <div class="animation-fadein field-div">
-          <h3 class="p-2 m-1 text-white">اندازه قد</h3>
-          <mat-slider
-            cl
-            min="140"
-            max="220"
-            step="1"
-            showTickMarks
-            discrete
-            [displayWith]="formatLabelCm"
-          >
-            <input
-              matSliderThumb
-              #height
-              id="height"
-              placeholder="height"
-              matInput
-              formControlName="height"
-            />
-          </mat-slider>
-        </div>
-        <div class="animation-fadein field-div bg-gorgeous-color">
-          <h3 class="p-2 m-1 text-white">وزن</h3>
-          <mat-slider
-            min="30"
-            max="150"
-            step="1"
-            showTickMarks
-            discrete
-            [displayWith]="formatLabelWeight"
-          >
-            <input
-              matSliderThumb
-              #weight
-              id="weight"
-              matInput
-              formControlName="weight"
-            />
-          </mat-slider>
-        </div>
-        <div class="animation-fadein field-div">
-          <label class="bg-gorgeous-color text-creamy w-100 p-2">رنگ چشم</label>
-          <input
-            #eye
-            id="eye"
-            matInput
-            placeholder="رنگ چشم"
-            formControlName="eye"
-          />
-        </div>
-        <div class="animation-fadein field-div">
-          <label class="bg-gorgeous-color text-creamy w-100 p-2">رنگ مو</label>
-          <input
-            #hair
-            id="hair"
-            matInput
-            placeholder="رنگ مو"
-            formControlName="hair"
-          />
-        </div>
-        <div class="animation-fadein field-div">
-          <label class="bg-gorgeous-color text-creamy w-100 p-2">
-            به چه تایپ ظاهری علاقمندید؟</label
-          >
-          <mat-select formControlName="typeInterrested" multiple>
-            <mat-option selected value="کلاسیک"> کلاسیک</mat-option>
-            <mat-option value="HipHop"> HipHop</mat-option>
-            <mat-option value="خیلی لش"> خیلی لش</mat-option>
-            <mat-option value=" فانتزی"> فانتزی</mat-option>
-          </mat-select>
-        </div>
-        <div class="animation-fadein field-div">
-          <h3 class="p-2 m-1 text-white">دور سینه</h3>
-          <mat-slider
-            min="60"
-            max="120"
-            step="1"
-            showTickMarks
-            discrete
-            [displayWith]="formatLabelCm"
-          >
-            <input
-              matSliderThumb
-              #waist
-              id="waist"
-              matInput
-              formControlName="waist"
-            />
-          </mat-slider>
-        </div>
-        <div class="animation-fadein field-div">
-          <h3 class="p-2 m-1 text-white">دور کمر</h3>
-          <mat-slider
-            min="60"
-            max="130"
-            step="1"
-            showTickMarks
-            discrete
-            [displayWith]="formatLabelCm"
-          >
-            <input
-              matSliderThumb
-              #hips
-              id="hips"
-              matInput
-              formControlName="hips"
-            />
-          </mat-slider>
-        </div>
-        <div
-          *ngIf="formNewPost.value.sx === 'female'"
-          class="animation-fadein field-div"
-        >
-          <label class="bg-gorgeous-color text-creamy w-100 p-2"> کاپ</label>
-          <mat-select formControlName="bra">
-            <mat-option value="A"> A</mat-option>
-            <mat-option value="B">B</mat-option>
-            <mat-option value="C">C</mat-option>
-            <mat-option value="C+">C+</mat-option>
-          </mat-select>
-        </div>
-        <div class="animation-fadein field-div">
-          <h3 class="p-2 m-1 text-white">دور بازو</h3>
-          <mat-slider
-            min="20"
-            max="150"
-            step="1"
-            showTickMarks
-            discrete
-            [displayWith]="formatLabelCm"
-          >
-            <input
-              matSliderThumb
-              #arm
-              id="arm"
-              matInput
-              formControlName="arm"
-            />
-          </mat-slider>
-        </div>
-        <div class="animation-fadein field-div">
-          <h3 class="p-2 m-1 text-white">اندازه زیر بغل</h3>
-          <mat-slider
-            min="20"
-            max="200"
-            step="1"
-            showTickMarks
-            discrete
-            [displayWith]="formatLabelCm"
-          >
-            <input
-              matSliderThumb
-              #armpit
-              id="armpit"
-              matInput
-              formControlName="armpit"
-            />
-          </mat-slider>
-        </div>
-        <div class="animation-fadein field-div">
-          <h3 class="p-2 m-1 text-white">دور ران</h3>
-          <mat-slider
-            min="30"
-            max="250"
-            step="1"
-            showTickMarks
-            discrete
-            [displayWith]="formatLabelCm"
-          >
-            <input
-              matSliderThumb
-              #taigh
-              id="taigh"
-              matInput
-              formControlName="taigh"
-            />
-          </mat-slider>
-        </div>
-        <div class="animation-fadein field-div">
-          <h3 class="p-2 m-1 text-white">درآمد ماهیانه</h3>
-          <mat-slider
-            min="5"
-            max="80"
-            step="1"
-            showTickMarks
-            discrete
-            [displayWith]="formatLabelMoney"
-          >
-            <input
-              matSliderThumb
-              #income
-              id="income"
-              matInput
-              formControlName="income"
-            />
-          </mat-slider>
-        </div>
-        <div class="animation-fadein field-div">
-          <label class="bg-gorgeous-color text-creamy w-100 p-2"> تتو</label>
-          <mat-select formControlName="tatto">
-            <mat-option value="بدون تتو"> ندارم</mat-option>
-            <mat-option value="تتو داشته باشد">دارم</mat-option>
-          </mat-select>
-        </div>
+          <div class="animation-fadein field-div">
+            <label class="bg-gorgeous-color text-creamy w-100 p-2"> رنگ</label>
+            <mat-select formControlName="color" multiple>
+              <mat-option selected value="green"> سبز</mat-option>
+              <mat-option value="blue"> آبی</mat-option>
+              <mat-option value="yellow"> زرد</mat-option>
+            </mat-select>
+          </div>
+          <div class="animation-fadein field-div">
+            <label class="bg-gorgeous-color text-creamy w-100 p-2"> سایز</label>
+            <mat-select formControlName="sizes" multiple>
+              <mat-option selected value="2x"> 2x</mat-option>
+              <mat-option value="3x"> 3x</mat-option>
+              <mat-option value="4x"> 4x</mat-option>
+            </mat-select>
+          </div>
+          <div class="animation-fadein field-div">
+            <h3 class="p-2 m-1 text-white">قیمت</h3>
+            <input #price id="price" matInput formControlName="price" />
+          </div>
+          <div class="animation-fadein field-div">
+            <label class="bg-gorgeous-color text-creamy w-100 p-2"> جنس</label>
+            <mat-select formControlName="material">
+              <mat-option value="ج۱"> ج۱</mat-option>
+              <mat-option value="ج۲">ج۲</mat-option>
+            </mat-select>
+          </div>
 
-        <div class="animation-fadein field-div">
-          <label class="bg-gorgeous-color text-creamy w-100 p-2">
-            استفاده دخانیات</label
-          >
-          <mat-select formControlName="smoke">
-            <mat-option value="اصلا"> ندارم</mat-option>
-            <mat-option value="علاقمند نباشد">دارم</mat-option>
-          </mat-select>
-        </div>
-        <div class="animation-fadein field-div">
-          <label class="bg-gorgeous-color text-creamy w-100 p-2">
-            استفاده نوشیدنی الکلی</label
-          >
-          <mat-select formControlName="drink">
-            <mat-option value="اصلا"> ندارم</mat-option>
-            <mat-option value="علاقه داشته باشد">دارم</mat-option>
-          </mat-select>
-        </div>
-        <div class="animation-fadein field-div">
-          <label class="bg-gorgeous-color text-creamy w-100 p-2"
-            >رابطه های باز</label
-          >
-          <mat-select formControlName="openrelation">
-            <mat-option value="موافق باشد"> اوکی ام</mat-option>
-            <mat-option value="اصلا">اصلا</mat-option>
-          </mat-select>
-        </div>
-        <div class="animation-fadein field-div">
-          <label class="bg-gorgeous-color text-creamy w-100 p-2">
-            چقدر مذهبی هستید؟</label
-          >
-          <mat-select formControlName="region">
-            <mat-option value="اصلا مذهبی نباشد"> اصلا</mat-option>
-            <mat-option value="معتدل باشد">معتدل</mat-option>
-            <mat-option value="خیلی مذهبی باشد">بسیار مذهبی</mat-option>
-          </mat-select>
-        </div>
-        <div class="animation-fadein field-div">
-          <input
-            #mainattr
-            id="mainattr"
-            matInput
-            placeholder=" خصوصیت بارز شما"
-            formControlName="mainattr"
-          />
-        </div>
-        <div class="animation-fadein field-div">
-          <input
-            #car
-            id="car"
-            matInput
-            placeholder="مدل اتوموبیل"
-            formControlName="car"
-          />
-        </div>
-        <div class="animation-fadein field-div">
-          <label class="bg-gorgeous-color text-creamy w-100 p-2"
-            >مسکن شخصی</label
-          >
-          <mat-select formControlName="house">
-            <mat-option value="بدون مسکن باشد"> ندارم</mat-option>
-            <mat-option value="آپارتمان">آپارتمان</mat-option>
-            <mat-option value="ویلایی">ویلایی</mat-option>
-          </mat-select>
-        </div>
-
-        <div class="animation-fadein field-div">
-          <input
-            #sport
-            id="sport"
-            matInput
-            placeholder="چه ورزشی انجام میدهید؟"
-            formControlName="sport"
-          />
-        </div>
-
-        <div style="flex-basis: 50%" class="animation-fadein field-div">
-          <div>
-            <button
-              class="m-4 p-3 text-xlarge text-light bg-darker"
-              *ngIf="usePicture"
-              mat-raised-button
-              (click)="selectFile()"
+          <div class="animation-fadein field-div">
+            <label class="bg-gorgeous-color text-creamy w-100 p-2">
+              مناسب برای</label
             >
-              انتخاب تصویر
+            <mat-select formControlName="sx">
+              <mat-option value="women"> بانوان</mat-option>
+              <mat-option value="men">آقایان</mat-option>
+              <mat-option value="sport">Sport</mat-option>
+            </mat-select>
+          </div>
+          <div class="animation-fadein field-div">
+            <label class="bg-gorgeous-color text-creamy w-100 p-2">
+              گروه
+            </label>
+            <mat-select formControlName="scent">
+              <mat-option value="گ۱"> گ۱</mat-option>
+              <mat-option value="گ۲">گ۲</mat-option>
+            </mat-select>
+          </div>
+          <div class="animation-fadein field-div">
+            <label class="bg-gorgeous-color text-creamy w-100 p-2">
+              تحفیف</label
+            >
+            <mat-select formControlName="discount">
+              <mat-option value="5"> 5</mat-option>
+              <mat-option value="5"> 10</mat-option>
+              <mat-option value="5"> 15</mat-option>
+              <mat-option value="5"> 20</mat-option>
+              <mat-option value="5"> 25</mat-option>
+            </mat-select>
+          </div>
+          <div class="animation-fadein field-div">
+            <label class="bg-gorgeous-color text-creamy w-100 p-2">
+              کشور سازنده</label
+            >
+            <mat-select formControlName="country">
+              <mat-option value="Germany"> Germany</mat-option>
+              <mat-option value="Japan">Japan</mat-option>
+            </mat-select>
+          </div>
+
+          <div style="flex-basis: 50%" class="animation-fadein field-div">
+            <div>
+              <button
+                class="m-4 p-3 text-xlarge text-light bg-darker"
+                *ngIf="usePicture"
+                mat-raised-button
+                (click)="selectFile()"
+              >
+                انتخاب تصویر
+              </button>
+
+              <input
+                id="file"
+                #file
+                type="file"
+                class="form-control m-3 file"
+                (change)="onFileChange($event)"
+              />
+            </div>
+            <div class="w-100 m-4">
+              <app-loadingProgressDynamic
+                *ngIf="
+                  loadingProgress === 'wait login authentication to be done'
+                "
+              ></app-loadingProgressDynamic>
+              <img
+                *ngIf="profileImage"
+                class="img-thumbnail mr-auto"
+                [src]="profileImage"
+              />
+            </div>
+          </div>
+          <div class="animation-fadein field-div d-relative">
+            <h3 class="p-1 mb-3 text-white">
+              توضیحات اضافی که دوست دارید برای کاربران درباره شما نمایش داده
+              شوند را بیان نماپید
+            </h3>
+            <textarea
+              #content
+              id="content"
+              formControlName="content"
+              class="bg-darker w-100 text-light"
+              name="content"
+              (keyup)="checkContent()"
+            ></textarea>
+          </div>
+
+          <div class="text-center w-100 m-3 p-2">
+            <button
+              class="w-fit p-3 mr-auto links-bg-fade"
+              mat-raised-button
+              (click)="submitFile()"
+            >
+              ادامه
             </button>
-
-            <input
-              id="file"
-              #file
-              type="file"
-              class="form-control m-3 file"
-              (change)="onFileChange($event)"
-            />
-          </div>
-          <div class="w-100 m-4">
-            <app-loadingProgressDynamic
-              *ngIf="loadingProgress === 'wait login authentication to be done'"
-            ></app-loadingProgressDynamic>
-            <img
-              *ngIf="profileImage"
-              class="img-thumbnail mr-auto"
-              [src]="profileImage"
-            />
           </div>
         </div>
-        <div class="animation-fadein field-div d-relative">
-          <h3 class="p-1 mb-3 text-white">
-            توضیحات اضافی که دوست دارید برای کاربران درباره شما نمایش داده شوند
-            را بیان نماپید
-          </h3>
-          <textarea
-            #content
-            id="content"
-            formControlName="content"
-            class="bg-darker w-100 text-light"
-            name="content"
-            (keyup)="checkContent()"
-          ></textarea>
-        </div>
-
-        <div class="text-center w-100 m-3 p-2">
-          <button
-            class="w-fit p-3 mr-auto links-bg-fade"
-            mat-raised-button
-            (click)="submitFile()"
-          >
-            ادامه
-          </button>
-        </div>
       </div>
-      </div>
-
     </ng-container>
   </form>
 </div>

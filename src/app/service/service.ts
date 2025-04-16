@@ -8,7 +8,7 @@ import { LocalStorageService } from './localstorage.service';
   providedIn: 'root',
 })
 export class ApiService {
-  baseUrl = 'https://burjcrown.com/drm/date/index.php?';
+  baseUrl = 'https://burjcrown.com/drm/mall/index.php?';
   constructor(private http: HttpClient) {}
   login(data: loginHandle): Observable<any> {
     const jsonEncoded = encodeURIComponent(JSON.stringify(data));
@@ -184,8 +184,12 @@ export class ApiService {
     );
   }
   submitNewPost(formValues: any, formData: any) {
+    console.log(
+      `https://burjcrown.com/drm/mall/index.php?id=6&userid=${formValues.userEmail}&category=${formValues.category}&groupid=${formValues.group}&title=${formValues.title}&content=${formValues.content}&color=${formValues.color}&brand=${formValues.brand}&&sizes=${formValues.sizes}&&price=${formValues.price}&&material=${formValues.material}&sx=${formValues.sx}&scent=${formValues.scent}&country=${formValues.country}&discount=${formValues.discount}`,
+
+    )
     return this.http.post(
-      `https://burjcrown.com/drm/date/index.php?id=6&userid=${formValues.userEmail}&category=${formValues.category}&groupid=${formValues.group}&title=${formValues.title}&content=${formValues.content}&sx=${formValues.sx}&age=${formValues.age}&height=${formValues.height}&weight=${formValues.weight}&hair=${formValues.hair}&eye=${formValues.eye}&glass=${formValues.glass}&bra=${formValues.bra}&typeInterrested=${formValues.typeInterrested}&waist=${formValues.waist}&hips=${formValues.hips}&arm=${formValues.arm}&armpit=${formValues.armpit}&income=${formValues.income}&taigh=${formValues.taigh}&tatto=${formValues.tatto}&smoke=${formValues.smoke}&drink=${formValues.drink}&region=${formValues.region}&openrelation=${formValues.openrelation}&mainattr=${formValues.mainattr}&car=${formValues.car}&house=${formValues.house}&sport=${formValues.sport}&cityid=${formValues.cityid}`,
+      `https://burjcrown.com/drm/mall/index.php?id=6&userid=${formValues.userEmail}&category=${formValues.category}&groupid=${formValues.group}&title=${formValues.title}&content=${formValues.content}&color=${formValues.color}&brand=${formValues.brand}&&sizes=${formValues.sizes}&&price=${formValues.price}&&material=${formValues.material}&sx=${formValues.sx}&scent=${formValues.scent}&country=${formValues.country}&discount=${formValues.discount}`,
       formData
     );
   }
@@ -230,7 +234,7 @@ export class ApiService {
     seed: string,
     filter: string
   ): Observable<any> {
-      console.log(
+       console.log(
       this.baseUrl +
         'id=1&offset=' +
         offet +

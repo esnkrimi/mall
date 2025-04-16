@@ -964,7 +964,7 @@ CREATE TABLE `exp` (
   `typeofpost` text NOT NULL,
   `height` int(11) NOT NULL,
   `weight` int(11) NOT NULL,
-  `hair` text NOT NULL,
+  `color` text NOT NULL,
   `eye` text NOT NULL,
   `glass` text NOT NULL,
   `bra` text NOT NULL,
@@ -972,13 +972,13 @@ CREATE TABLE `exp` (
   `hips` int(11) NOT NULL,
   `arm` int(11) NOT NULL,
   `armpit` int(11) NOT NULL,
-  `income` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
   `thigh` int(11) NOT NULL,
-  `tatto` text NOT NULL,
-  `smoke` text NOT NULL,
-  `drink` text NOT NULL,
-  `region` text NOT NULL,
-  `openrelation` text NOT NULL,
+  `material` text NOT NULL,
+  `sx` text NOT NULL,
+  `scent` text NOT NULL,
+  `country` text NOT NULL,
+  `discount` text NOT NULL,
   `mainattr` text NOT NULL,
   `car` text NOT NULL,
   `house` text NOT NULL,
@@ -993,7 +993,7 @@ CREATE TABLE `exp` (
 -- Dumping data for table `exp`
 --
 
-INSERT INTO `exp` (`id`, `userid`, `groupid`, `title`, `content`, `date`, `confirm`, `typeofpost`, `height`, `weight`, `hair`, `eye`, `glass`, `bra`, `waist`, `hips`, `arm`, `armpit`, `income`, `thigh`, `tatto`, `smoke`, `drink`, `region`, `openrelation`, `mainattr`, `car`, `house`, `sport`, `typeInterrested`, `cityid`, `age`, `scorezoom`) VALUES
+INSERT INTO `exp` (`id`, `userid`, `groupid`, `title`, `content`, `date`, `confirm`, `typeofpost`, `height`, `weight`, `color`, `eye`, `glass`, `bra`, `waist`, `hips`, `arm`, `armpit`, `price`, `thigh`, `material`, `sx`, `scent`, `country`, `discount`, `mainattr`, `car`, `house`, `sport`, `typeInterrested`, `cityid`, `age`, `scorezoom`) VALUES
 (6, 1, 1, 'esan', 0x2532353236253235323331373035253235334225323532362532353233313537352532353342253235323625323532333136303525323533422532353236253235323331363036253235334225323532362532353233313537382532353342, '20250309111145', 1, 'female', 179, 86, 'مشکی', 'مشکی', 'مجرد', 'A', 95, 96, 90, 93, 97, 95, 'YES', 'YES', 'YES', 'YES', 'YES', 'مهربان', 'BMW', 'NO', 'SWIM', 'classic,hiphop,lash', '121', 123, 0),
 (7, 2, 1, 'ehs', 0x78787878, '20250309112806', 1, 'female', 170, 70, 'مشکی', 'مشکی', 'مجرد', 'A', 100, 100, 60, 60, 10, 100, 'NO', 'NO', 'NO', 'NO', 'NO', 'sx', 'benz', 'NO', 'spo', 'classic', '5', 122, 0),
 (8, 1, 1, 'آریانا', 0x2623313538313b2623313538333b2623313537353b2623313537353b2623313537353b2623313537353b2623313537353b2623313537353b2623313537363b, '20250309134538', 1, 'female', 170, 70, 'مشکی', 'مشکی', 'مجرد', 'A', 100, 100, 60, 60, 10, 100, 'NO', 'NO', 'NO', 'NO', 'NO', 'مهربان', 'BMW', 'NO', 'شنا', 'classic', '200', 22, 0),
@@ -1140,7 +1140,7 @@ CREATE TABLE `favourite` (
   `typeofpost` text NOT NULL,
   `height` int(11) NOT NULL,
   `weight` int(11) NOT NULL,
-  `hair` text NOT NULL,
+  `color` text NOT NULL,
   `eye` text NOT NULL,
   `glass` text NOT NULL,
   `waist` int(11) NOT NULL,
@@ -1148,13 +1148,13 @@ CREATE TABLE `favourite` (
   `arm` int(11) NOT NULL,
   `armpit` int(11) NOT NULL,
   `thigh` int(11) NOT NULL,
-  `tatto` text NOT NULL,
-  `smoke` text NOT NULL,
-  `drink` text NOT NULL,
-  `region` text NOT NULL,
-  `openrelation` text NOT NULL,
+  `material` text NOT NULL,
+  `sx` text NOT NULL,
+  `scent` text NOT NULL,
+  `country` text NOT NULL,
+  `discount` text NOT NULL,
   `mainattr` text NOT NULL,
-  `income` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
   `car` text NOT NULL,
   `house` text NOT NULL,
   `sport` text NOT NULL,
@@ -1165,7 +1165,7 @@ CREATE TABLE `favourite` (
 -- Dumping data for table `favourite`
 --
 
-INSERT INTO `favourite` (`id`, `userid`, `groupid`, `typeofpost`, `height`, `weight`, `hair`, `eye`, `glass`, `waist`, `hips`, `arm`, `armpit`, `thigh`, `tatto`, `smoke`, `drink`, `region`, `openrelation`, `mainattr`, `income`, `car`, `house`, `sport`, `age`) VALUES
+INSERT INTO `favourite` (`id`, `userid`, `groupid`, `typeofpost`, `height`, `weight`, `color`, `eye`, `glass`, `waist`, `hips`, `arm`, `armpit`, `thigh`, `material`, `sx`, `scent`, `country`, `discount`, `mainattr`, `price`, `car`, `house`, `sport`, `age`) VALUES
 (1, 1, 1, 'female', 170, 70, 'مشکی', 'مشکی', 'مجرد', 100, 100, 60, 60, 100, 'بدون تتو', 'اصلا', 'اصلا', 'معتدل باشد', 'موافق باشد', 'جذاب و دلنشین', 10, 'BMW 560', 'آپارتمان', 'شنا', 50);
 
 -- --------------------------------------------------------

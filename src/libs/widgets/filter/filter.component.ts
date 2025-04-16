@@ -134,9 +134,11 @@ export class FilterComponent implements OnChanges {
     });
   }
   fetchFiltersSelect() {
-    this.store.select(selectFilters).subscribe((res) => {
-      this.filterData = res;
-      this.fetchRange(res, this.filter?.name);
+    this.store.select(selectFilters).subscribe((res: any) => {
+      const tmp1 = res.filter((res: any) => res.name === this.filter.name);
+      this.filterData = tmp1[0].values;
+      console.log(this.filterData);
+      // this.fetchRange(res, this.filter?.name);
     });
   }
   fetchRange(source: any, title: string) {

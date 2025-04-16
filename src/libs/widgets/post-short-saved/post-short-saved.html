@@ -48,18 +48,18 @@
       <mat-chip *ngIf="data?.house!==''" [title]="data?.house"
         ><i class="fa fa-home"></i
       ></mat-chip>
-      <mat-chip *ngIf="data?.smoke!=='اصلا'" [title]="data?.smoke"
-        >SMOKE</mat-chip
+      <mat-chip *ngIf="data?.sx!=='اصلا'" [title]="data?.sx"
+        >sx</mat-chip
       >
-      <mat-chip [title]="data?.drink" *ngIf="data?.drink!=='اصلا'"
+      <mat-chip [title]="data?.scent" *ngIf="data?.scent!=='اصلا'"
         ><i class="fa fa-glass"></i
       ></mat-chip>
       <mat-chip
-        [title]="' تتو : '+data?.tatto "
-        *ngIf="data?.tatto!=='بدون تتو'"
+        [title]="' تتو : '+data?.material "
+        *ngIf="data?.material!=='بدون تتو'"
         ><i class="fa fa-paint-brush"></i
       ></mat-chip>
-      <mat-chip title="درآمد ماهیانه">{{data?.income}} M</mat-chip>
+      <mat-chip title="درآمد ماهیانه">{{data?.price}} M</mat-chip>
       <mat-chip
         class="chips border border-black"
         *ngFor="let c of data.category"
@@ -81,7 +81,7 @@
       <div
         (click)="
         imageZoom(
-          'https://burjcrown.com/drm/date/users/' +
+          'https://burjcrown.com/drm/mall/users/' +
             data?.email +
             '/' +
             data?.id +
@@ -99,7 +99,7 @@
         (click)="gotoRouteWithDelay('feature/zoom/' + data?.id)"
         onerror="this.src = '../../../assets/img/girl.png'"
         [src]="
-        'https://burjcrown.com/drm/date/users/' +
+        'https://burjcrown.com/drm/mall/users/' +
         data?.email +
         '/' +
         data?.id +
@@ -112,7 +112,7 @@
         (click)="gotoRouteWithDelay('feature/zoom/' + data?.id)"
         onerror="this.src = '../../../assets/img/boy.png'"
         [src]="
-        'https://burjcrown.com/drm/date/users/' +
+        'https://burjcrown.com/drm/mall/users/' +
         data?.email +
         '/' +
         data?.id +
