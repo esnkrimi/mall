@@ -1,4 +1,3 @@
-text/x-generic index.php ( PHP script, ASCII text )
 <?php
 ini_set('display_errors', '0');
 //header('Content-Type: image/jpeg');
@@ -87,5 +86,7 @@ else if ($id == 28)
   fetchUserBoard($con);
 else if ($id == 29)
   seenMessage($con);
+else if ($id == 30)
+  loadCommentOfPost($con);
 //echo '}';
 $link->close();
