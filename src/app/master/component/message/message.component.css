@@ -1,0 +1,22 @@
+.text-small {
+  font-size: 1.4vh;
+}
+* {
+  font-family: yekan;
+}
+.message-frame {
+  width: 100% !important;
+  justify-content: right;
+}
+.message-frame > p > span {
+  color: white;
+  padding: 0.9vh;
+}
+.image-icon {
+  width: 3vh;
+  height: 3vh;
+  display: inline;
+}
+.text-small {
+  font-size: 1.3vh !important;
+}

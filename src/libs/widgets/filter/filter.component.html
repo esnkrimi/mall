@@ -1,0 +1,85 @@
+<ng-container [ngSwitch]="filter?.type">
+  <div class="bg-filter w-100">
+    <div *ngSwitchCase="'slide'" class="text-light mt-3">
+      <p class="text-light-muted text-small pr-2">
+        {{ filter.title }} ({{ filter.postfix }})
+      </p>
+      <mat-slider
+        (change)="trackFilter()"
+        class="slider"
+        [min]="filter.min"
+        [max]="filter.max"
+        step="1"
+        showTickMarks
+        discrete
+      >
+        <input
+          [(ngModel)]="filterValueMin"
+          matSliderStartThumb
+          [id]="filter.name"
+          matInput
+          [value]="filter.min"
+        />
+        <input
+          [(ngModel)]="filterValueMax"
+          matSliderEndThumb
+          [id]="filter.name"
+          matInput
+          [value]="filter.max"
+        />
+      </mat-slider>
+    </div>
+    <div *ngSwitchCase="'select'" class="text-light mt-3 p-1">
+      <p class="text-light-muted text-small pr-2">
+        {{ filter.title }}
+      </p>
+      <form [formGroup]="formFilter">
+        <mat-select
+          [(ngModel)]="filterValue"
+          formControlName="filter"
+          class="dir-rtl w-100 text-right mt-2"
+        >
+          <mat-option
+            selected
+            class="p-1"
+            (click)="trackFilter()"
+            *ngFor="let item of rangeData"
+            [value]="item[filter.name]"
+            >{{ item[filter.name] }}</mat-option
+          >
+        </mat-select>
+      </form>
+    </div>
+    <div *ngSwitchCase="'cityid'" class="text-light mt-3 p-1">
+      <p class="text-light-muted text-small p-1">محل زندگی</p>
+      <form [formGroup]="formFilter">
+        <div>
+          <mat-select
+            formControlName="provinceid"
+            [(ngModel)]="provinceidSelected"
+          >
+            <mat-option
+              (click)="changeProvince(provinceidSelected)"
+              *ngFor="let item of provinces"
+              selected
+              [value]="item.province_id"
+              >{{ item.province }}</mat-option
+            >
+          </mat-select>
+        </div>
+
+        <div class="w-100" class="animation-fadein">
+          <mat-select [(ngModel)]="filterValue" formControlName="cityid">
+            <mat-option
+              *ngFor="let item of cities"
+              selected
+              (click)="trackFilter()"
+              [value]="item.id"
+              >{{ item.city }}</mat-option
+            >
+          </mat-select>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,38 @@
+<div class="bg-darker w-100 text-right">
+  <div
+    (click)="messageBoardListActive(item?.sender, item?.email)"
+    *ngFor="let item of messages"
+    class="rounded m-1 p-2 w-100 d-flex message-frame text-right"
+  >
+    <div class="hover-bg-color bg-gorgeous-color w-fit text-right shadow-sm rounded p-1">
+      <p>
+        <span class="links text-capitalize mr-2">{{ item?.icon }}</span>
+        <span>
+          <img
+            onerror="this.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfwM2108oL7bhv9Ee8QQBC2dCng0jnV0kAow&s'"
+            [src]="
+              'https://burjcrown.com/drm/date/users/' +
+              item?.sender +
+              '/user.jpg'
+            "
+            class="image-icon mr-auto rounded-circle"
+          />
+        </span>
+      </p>
+      <p class="pr-4 pt-1 mr-3">
+        <span class="text-light-muted">
+          {{ otDateTime(item?.date) }}
+        </span>
+      </p>
+      <p class="pr-4 pt-1 mr-3">
+        <span class="text-creamy">{{ item?.content }}</span>
+        <span *ngIf="item?.icon === item?.sender">
+          <i class="fa fa-arrow-right"></i>
+        </span>
+        <span *ngIf="item?.icon !== item?.sender">
+          <i class="fa fa-arrow-left"></i>
+        </span>
+      </p>
+    </div>
+  </div>
+</div>

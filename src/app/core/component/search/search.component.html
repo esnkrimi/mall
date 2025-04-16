@@ -1,0 +1,46 @@
+<div class="w-100 mr-auto">
+  <form class="w-100 text-center" [formGroup]="formSearch">
+    <input
+      formControlName="searchInput"
+      matInput
+      class="w-100 search-input shadow-sm"
+      value="Search"
+    />
+  </form>
+  <div class="d-relative bg-black p-1 mt-1" *ngIf="searchPool[0]?.id">
+    <div class="div-search-result text-white bg-black">
+      <app-loadingProgressDynamic
+        *ngIf="loadingProgressDynamicVar === 'autocomplete'"
+      ></app-loadingProgressDynamic>
+      <div
+        (click)="gotoRouteWithDelay('feature/userBoard/' + item?.email)"
+        *ngFor="let item of searchPool"
+        class="p-2 text-right cursor-pointer rounded"
+      >
+        <ng-container *ngIf="item && item.id">
+          <div class="d-flex flex-nowrap search-result-container w-100">
+            <div>
+              <p>{{ item.name }} {{ item.family }}</p>
+              <p class="p-2 text-light text-smalls">
+                <span class="p-1">{{ item.email | titlecase }}</span>
+              </p>
+            </div>
+            <div>
+              <span>
+                <img
+                  [src]="
+                    'https://burjcrown.com/drm/date/users/' +
+                    item?.email +
+                    '/user.jpg'
+                  "
+                  onerror="this.src = '../../../../assets/img/unknown-user.png'"
+                  class="m-2 rounded cursor-pointer small-image"
+                />
+              </span>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

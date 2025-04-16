@@ -1,0 +1,14 @@
+.info-rows>div{
+    padding: 0.5em;
+    margin: 1em;
+    border-bottom :solid 1px #383838
+}
+span{
+    direction: rtl !important;
+}
+.text-muted-light{
+    color: var(--COLOR-MUTED) !important;
+}
+.display-none {
+  display: none;
+}

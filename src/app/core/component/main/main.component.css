@@ -1,0 +1,67 @@
+.deactive {
+  font-weight: bold;
+  opacity: 1;
+}
+::ng-deep .mat-progress-bar-fill::after {
+    background-color: #7f05b8 !important;
+}
+.image-icons {
+  display: inline-block;
+  vertical-align: middle !important;
+  justify-content: center;
+  justify-items: center;
+  justify-self: center;
+  text-align: center;
+  top: 50%;
+  width: 3em !important;
+  height: 3em !important;
+}
+.v-align-parent {
+  height: 5em;
+  vertical-align: middle;
+}
+.image-icon {
+  width: 3vh !important;
+  height: 3vh !important;
+  margin: auto;
+}
+.one-row-frame {
+  display: inline-flex;
+  vertical-align: middle;
+  justify-items: center;
+  justify-self: center;
+  justify-content: right;
+}
+select {
+  outline: none !important;
+  width: 40%;
+  text-align: right !important;
+  justify-content: right !important;
+  font-size: 1.4vh !important;
+  padding: 0 !important;
+  background-color: var(--COLOR-DARKER);
+  color: white;
+  border: solid 1px var(--COLOR-DARK);
+  font-family: yekan;
+  height: 3.8vh !important;
+}
+@media only screen and (max-width: 1200px) {
+  select {
+    width: 80%;
+  }
+}
+.active-seed {
+  color: var(--COLOR-DARK-GREEN);
+}
+.chip-set,
+::ng-deep .mdc-evolution-chip-set__chips {
+  display: block !important;
+  color:var(--COLOR-DARKER) !important;
+}
+::ng-deep .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label {
+  color:var(--COLOR-DARKER) !important;
+
+}
+.chips{
+  color:var(--COLOR-DARKER) !important;
+}

@@ -1,0 +1,140 @@
+<div
+  *ngIf="data"
+  class="w-100 p-3 mt-2 bg-dark frame-item text-right shadow-sm"
+>
+  <div class="d-flex">
+    <div style="flex-basis: 50%" class="text-left text-light d-flex">
+      <span
+        nh
+        class="text-small text-light"
+        *ngIf="!deleteConfirm&&adminPermission"
+        (click)="deleteConfirm=true"
+      >
+        <i class="cursor-pointer fa links-pink fa-trash text-pink fa-2x"></i
+      ></span>
+      <span
+        *ngIf="deleteConfirm"
+        class="bg-danger text-light cursor-pointer p-1 m-1 links-pink rounded"
+        (click)="deletePost(data)"
+        >بله</span
+      >
+      <span
+        *ngIf="deleteConfirm"
+        class="text-light border cursor-pointer p-1 m-1 links-pink rounded"
+        (click)="deleteConfirm=false"
+      >
+        انصراف</span
+      >
+    </div>
+    <div style="flex-basis: 50%" class="text-right">
+      <div class="text-right d-flex dir-rtl">
+        <span>
+          <h3 style="margin-top: auto" [innerHTML]="data?.title"></h3>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="d-relative">
+    <div
+      *ngIf="showDetails"
+      class="details-frame p-1 d-flex tags-frame flex-wrap"
+    >
+      <mat-chip>{{data?.location[1]}} - {{data?.location[0]}}</mat-chip>
+      <mat-chip>{{data?.age}} Y </mat-chip>
+      <mat-chip> {{data?.height}} CM </mat-chip>
+      <mat-chip> {{data?.weight}} KG </mat-chip>
+      <mat-chip *ngIf="data?.groupid==='1'"> Strait </mat-chip>
+      <mat-chip *ngIf="data?.groupid==='2'"> رنگین کمانی </mat-chip>
+      <mat-chip *ngIf="data?.groupid==='3'"> رنگین کمانی </mat-chip>
+
+      <mat-chip *ngIf="data?.car!==''" [title]="data?.car"
+        ><i class="fa fa-car"> {{data?.car}}</i></mat-chip
+      >
+      <mat-chip *ngIf="data?.house!==''" [title]="data?.house"
+        ><i class="fa fa-home"></i
+      ></mat-chip>
+      <mat-chip *ngIf="data?.smoke!=='اصلا'" [title]="data?.smoke"
+        >SMOKE</mat-chip
+      >
+      <mat-chip [title]="data?.drink" *ngIf="data?.drink!=='اصلا'"
+        ><i class="fa fa-glass"></i
+      ></mat-chip>
+      <mat-chip
+        [title]="' تتو : '+data?.tatto "
+        *ngIf="data?.tatto!=='بدون تتو'"
+        ><i class="fa fa-paint-brush"></i
+      ></mat-chip>
+      <mat-chip title="درآمد ماهیانه">{{data?.income}} M</mat-chip>
+      <mat-chip
+        class="chips border border-black"
+        *ngFor="let c of data.category"
+        >{{ c }}</mat-chip
+      >
+    </div>
+    <div class="mr-1 mt-1 w-100 text-right d-relative bg-dark">
+      <app-loadingProgressDynamic
+        *ngIf="loadingProgressDynamicVar === 'post content' + data?.date"
+      ></app-loadingProgressDynamic>
+    </div>
+    <div class="pt-4 text-right d-relative">
+      <div class="corner-left-absolute-div">
+        <img
+          *ngIf="data?.groupid!=='1'"
+          src="../../../assets/img/rainbow.png"
+        />
+      </div>
+      <div
+        (click)="
+        imageZoom(
+          'https://burjcrown.com/drm/date/users/' +
+            data?.user.email +
+            '/' +
+            data?.id +
+            '/1.jpg'
+        )
+      "
+        class="corner-right-absolute-div"
+      >
+        <i
+          class="fa mr-auto fa-search text-pink fat-3x bg-black rounded-circle p-2 links-pink cursor-pointer"
+        ></i>
+      </div>
+      <img
+        *ngIf="data?.typeofpost==='female'"
+        (click)="gotoRouteWithDelay('feature/zoom/' + data?.id)"
+        onerror="this.src = '../../../assets/img/girl.png'"
+        [src]="
+        'https://burjcrown.com/drm/date/users/' +
+        data?.user?.email +
+        '/' +
+        data?.id +
+        '/1.jpg'
+      "
+        class="rounded w-100 cursor-pointer img-thumb"
+      />
+      <img
+        *ngIf="data?.typeofpost==='male'"
+        (click)="gotoRouteWithDelay('feature/zoom/' + data?.id)"
+        onerror="this.src = '../../../assets/img/boy.png'"
+        [src]="
+        'https://burjcrown.com/drm/date/users/' +
+        data?.user?.email +
+        '/' +
+        data?.id +
+        '/1.jpg'
+      "
+        class="rounded w-100 cursor-pointer img-thumb"
+      />
+    </div>
+  </div>
+
+  <div class="d-flex w-100 pt-2 mt-2 comments">
+    <div class="d-relative">
+      <span class="text-small"> تعداد لایک </span>
+      <span *ngIf="likeCounter(data?.likes)!=='.'">
+        {{ likeCounter(data?.likes) }}
+      </span>
+      <span *ngIf="likeCounter(data?.likes)==='.'"> 0 </span>
+    </div>
+  </div>
+</div>

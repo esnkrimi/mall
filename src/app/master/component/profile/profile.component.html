@@ -1,0 +1,150 @@
+<ng-container [ngSwitch]="componentSetting?.variables?.pathRouteOfProfile">
+  <div class="d-relative">
+    <app-loadingProgressDynamic
+      *ngIf="loadingProgressDynamicVar === 'change profile setting'"
+    ></app-loadingProgressDynamic>
+    <ng-container *ngSwitchCase="'profile'">
+      <ng-container *ngTemplateOutlet="profile"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="'message'">
+      <ng-container *ngTemplateOutlet="messages"></ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'findOthers'">
+      <ng-container *ngTemplateOutlet="findOthers"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="'myPosts'">
+      <ng-container *ngTemplateOutlet="myPosts"></ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'interrests'">
+      <ng-container *ngTemplateOutlet="interrests"></ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'myFollows'">
+      <ng-container *ngTemplateOutlet="myFollows"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="'wishlist'">
+      <ng-container *ngTemplateOutlet="wishlist"></ng-container>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-template #profile>
+  <div class="w-100 bg-gorgeous-color">
+    <div class="w-100 row flex-row-reverse">
+      <div class="col-md-3 p-3 d-relative">
+        <app-loadingProgressDynamic
+          *ngIf="loadingProgressDynamicVar === 'change profile picture'"
+        ></app-loadingProgressDynamic>
+        <div class="d-relative show-on-hover">
+          <img
+            class="w-100 m-3 rounded"
+            onerror="this.src = '../../../../assets/img/unknown-user.png'"
+            [src]="
+              'https://burjcrown.com/drm/date/users/' +
+              userLogined.email +
+              '/user.jpg' +
+              '?ts=' +
+              timestap
+            "
+          />
+          <div
+            class="text-center absolute-on absolute-on-left-bottom-corner child"
+          >
+            <button class="p-3" mat-raised-button (click)="selectFile()">
+              تغییر تصویر
+            </button>
+            <input
+              #fileImageProfile
+              id="fileImageProfile"
+              type="file"
+              class="form-control display-none"
+              (change)="onFileChange($event)"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-md-9 row dir-rtl text-right p-1 info-rows"
+        (click)="openDialogEditProfile()"
+      >
+        <div>
+          <span class="text-light-muted text-small">نام </span>
+          <span class="text-light text-small">{{ user?.profile?.name }} </span>
+        </div>
+        <div>
+          <span class="text-light text-small"
+            >{{ user?.profile?.family }}
+          </span>
+          <span class="text-light-muted text-small">شهرت </span>
+        </div>
+        <div>
+          <span class="text-light text-small">{{ user?.profile?.email }} </span>
+          <span class="text-light-muted text-small">ایمیل </span>
+        </div>
+
+        <div>
+          <span class="text-light text-small"
+            >{{ user?.profile?.telegram }}
+          </span>
+          <span class="text-light-muted text-small">آی دی تلگرام </span>
+        </div>
+
+        <div>
+          <span class="text-light text-small"
+            >{{ user?.profile?.instagram }}
+          </span>
+          <span class="text-light-muted text-small">آی دی اینستاگرام </span>
+        </div>
+
+        <div>
+          <span class="text-light text-small"
+            >{{ user?.profile?.email2 }}
+          </span>
+          <span class="text-light-muted text-small">ایمیل </span>
+        </div>
+        <div>
+          <span class="text-light text-small"
+            >{{ user?.profile?.whatsapp }}
+          </span>
+          <span class="text-light-muted text-small">واتساپ </span>
+        </div>
+
+        <div>
+          <span class="text-light-muted text-small">شغل </span>
+          <span class="text-light text-small">{{ user?.profile?.job }} </span>
+        </div>
+        <div>
+          <span class="text-light text-small"
+            >{{ user?.profile?.birthdate }}
+          </span>
+          <span class="text-light-muted text-small">شروع فعالیت </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #myPosts>
+  <app-myposts [posts]="user.post"></app-myposts>
+</ng-template>
+<ng-template #messages>
+  <app-message></app-message>
+</ng-template>
+
+<ng-template #interrests>
+  <div>
+    <app-user-interrests [deviceIsPc]="deviceIsPc"></app-user-interrests>
+  </div>
+</ng-template>
+
+<ng-template #findOthers>
+  <div>findOthers</div>
+</ng-template>
+
+<ng-template #myFollows>
+  <div class="text-center w-100"><app-follows></app-follows></div>
+</ng-template>
+<ng-template #wishlist>
+  <div class="text-center w-100"><app-wishlist></app-wishlist></div>
+</ng-template>

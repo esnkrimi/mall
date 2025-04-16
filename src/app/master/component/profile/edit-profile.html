@@ -1,0 +1,37 @@
+<div class="modal-full p-2 bg-darker">
+  <form [formGroup]="formEditProfile">
+    <div>
+      <mat-label>نام</mat-label>
+      <input matInput type="text" formControlName="firstName" />
+    </div>
+    <div>
+      <mat-label>نام خانوادگی</mat-label>
+      <input matInput type="text" formControlName="lastName" />
+    </div>
+    <div>
+      <mat-label> شغل</mat-label>
+      <input matInput type="text" formControlName="job" />
+    </div>
+    <div>
+      <mat-label> آی دی تلگرام</mat-label>
+      <input matInput type="text" formControlName="telegram" />
+    </div>
+    <div>
+      <mat-label> آی دی اینستاگرام</mat-label>
+      <input matInput type="text" formControlName="instagram" />
+    </div>
+    <div>
+      <mat-label> واتساپ</mat-label>
+      <input matInput type="text" formControlName="whatsapp" />
+    </div>
+    <div>
+      <mat-label> ایمیل </mat-label>
+      <input matInput type="text" formControlName="email2" />
+    </div>
+    <div class="mt-4 w-100 text-center">
+      <button mat-raised-button class="p-4" (click)="updateProfile()">
+        ارسال
+      </button>
+    </div>
+  </form>
+</div>

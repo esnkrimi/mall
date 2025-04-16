@@ -1,0 +1,30 @@
+<div class="d-flex flex-nowrap w-75">
+  <div class="w-50" (click)="changeHandle('follower')">
+    <span class="p-1 m-1 text-center links">دنباله ها</span>
+  </div>
+
+  <div class="w-50" (click)="changeHandle('following')">
+    <span class="p-1 m-1 text-center links">دنبال های من</span>
+  </div>
+</div>
+
+<div class="w-100 m-1 p-2 text-right">
+  <div
+    [routerLink]="['/profile/' + item?.email]"
+    *ngFor="let item of componentVariables.listOfFollows"
+    class="d-flex flex-nowrap text-right w-100"
+  >
+    <span>
+      {{ item?.email }}
+    </span>
+    <span
+      ><img
+        class="image-icon"
+        [src]="
+          'https://burjcrown.com/drm/date/users/' +
+          item?.email +
+          '/user.jpg?ts=8'
+        "
+    /></span>
+  </div>
+</div>

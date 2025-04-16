@@ -1,0 +1,82 @@
+.w-100 {
+  width: 100% !important;
+}
+.inline {
+  display: inline-flex;
+}
+.inline > div:first-child {
+  flex-basis: 80%;
+}
+.inline > div:last-child {
+  flex-basis: 20%;
+}
+.icons > span {
+  padding: 2%;
+}
+.streched-button {
+  width: 100%;
+  color: white !important;
+  background-color: black !important;
+}
+.homeWaitRouteAnimation {
+  animation: colorize 2s forwards;
+}
+@keyframes colorize {
+  0% {
+    color: black;
+  }
+  50% {
+    color: green !important;
+  }
+  80% {
+    color: red !important;
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .fa {
+  }
+}
+.fa {
+  cursor: pointer;
+  padding: 0.15em;
+}
+.mat-badge-content {
+  background: var(--COLOR-MASTER-SECOND-A);
+  color: white;
+}
+.image-logo{
+  width: 10vh;
+  height: 5vh;
+}
+.text-logos{
+  display:inline;
+  font-size: 4vh;
+  justify-content: flex-start;
+  vertical-align: middle;
+  align-items: flex-start;
+  align-content: flex-end;
+  align-self: flex-start;
+  font-weight: bolder;
+}
+.text-logos>span:nth-child(1){
+  color: var(--COLOR-GOLD) !important;
+}
+.text-logos>span:nth-child(2){
+  color: var(--COLOR-MASTER-SECOND-A) !important;
+}
+.text-logos>span:nth-child(3){
+  color: var(--COLOR-MASTER-FIRST-B) !important;
+}
+.text-logos>span:nth-child(4){
+  color: var(--COLOR-MASTER-SECOND-B) !important;
+}
+.text-logos>span:nth-child(5){
+  color: var(--COLOR-BLUEBLACK) !important;
+}
+.text-logos>span:nth-child(6){
+  color: var(--COLOR-DARK-ORANGE) !important;
+}

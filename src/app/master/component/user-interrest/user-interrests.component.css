@@ -1,0 +1,28 @@
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled)
+{
+    background-color: var(--COLOR-LIGHT) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    outline: none !important;
+    text-align: right !important;
+    direction: rtl !important;
+    padding-right: 5% !important;
+    padding-left: 5% !important;
+}
+
+
+::ng-deep .mdc-text-field--filled
+{
+    background-color: var(--COLOR-LIGHT) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    outline: none !important;
+    text-align: right !important;
+    direction: rtl !important;
+    padding-right: 5% !important;
+    padding-left: 5% !important;
+}
+.links{
+    height: fit-content !important;
+    width: fit-content !important;
+}

@@ -1,0 +1,39 @@
+<div class="d-relative">
+  <p *ngIf="deviceIsPc" class="text-light p-3" (click)="showMenu()">
+    <span
+      *ngIf="userLoginedObject?.name[0]"
+      class="border border-black text-creamy p-2 rounded mt-1 mb-1 fw-bold fonr-different rectangle-dimension"
+    >
+      سلام
+      {{ userLoginedObject?.email | uppercase }}
+    </span>
+
+    <span
+      *ngIf="!userLoginedObject?.name[0]"
+      class="rounded-circle pt-2 pb-2 mt-1 mb-1 pl-4 pr-4 bg-dark-green rectangle-dimension"
+    >
+      U
+    </span>
+  </p>
+  <p *ngIf="!deviceIsPc" class="text-light p-3" (click)="showMenu()">
+    <span
+      *ngIf="userLoginedObject?.name[0]"
+      class="rounded-circle pt-2 pb-2 mt-1 mb-1 pl-4 pr-4 bg-light-green text-dark fonr-different rectangle-dimension"
+    >
+      {{ userLoginedObject?.name[0] | uppercase }}
+    </span>
+    <span
+      *ngIf="!userLoginedObject?.name[0]"
+      class="rounded-circle pt-2 pb-2 mt-1 mb-1 pl-4 pr-4 bg-dark-green rectangle-dimension"
+    >
+      U
+    </span>
+  </p>
+</div>
+<div
+  *ngIf="showResponsiveMenu && !deviceIsPc"
+  class="d-absolute-menu border text-left p-2 w-100 text-left"
+>
+  <i class="ml-4 fa fa-arrow-left" (click)="hideMenu()"></i>
+  <app-profile-menu></app-profile-menu>
+</div>

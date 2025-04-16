@@ -1,0 +1,87 @@
+<div
+  *ngIf="componentSetting.visualDirectives.loadingProgressActive"
+  class="full-width-bg-transparent"
+>
+  <img src="../assets/img/foxloading.gif" class="image-small img-center" />
+</div>
+<div class="w-100 main-frame justify-content-center bg-darker border">
+  <div
+    class="header-div w-100 justify-content-center align-self-center text-center"
+  >
+    <div class="w-100 text-center border-bottom bg-gorgeous-color border-light">
+      <app-header [userLoginedObject]="userLoginedObject"></app-header>
+    </div>
+
+    <div class="frame-div w-100 justify-content-center d-flex">
+      <div
+        class="flex-nowrap w-60 main w-main-width"
+        [class.w-100]="!deviceIsPc"
+        [class.d-flex]="deviceIsPc"
+      >
+        <div
+          [class.p-3]="deviceIsPc"
+          class="justify-content-center text-center rounded mt-3"
+        >
+          <div class="w-100 inner-div-center">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+        <div
+          class="pb-4 mb-4"
+          [class.animation-fadein]="!deviceIsPc && showMenu"
+          *ngIf="
+            (componentSetting.visualDirectives.routeFrom !== 'profile' &&
+              showMenu) ||
+            (deviceIsPc &&
+              componentSetting.visualDirectives.routeFrom !== 'profile')
+          "
+          [class.d-fixed-menu]="!deviceIsPc && showMenu"
+        >
+          <app-menu></app-menu>
+          <div class="bg-light-pink opacity-65 w-100 p-2 text-black rounded">
+            <span> فیلتر ها </span>
+          </div>
+          <div class="w-100 mt-4">
+            <mat-chip
+              (click)="removeFilter(item)"
+              class="m-1 cursor-pointer text-small rounded bg-light-pink text-darker"
+              *ngFor="let item of filterAssigned"
+            >
+              {{ item.title }}
+              <i class="fa fa-close cursor-pointer links-pink"></i>
+            </mat-chip>
+          </div>
+          <div [class.scroller-vertical]="classScrollerDeactive || !deviceIsPc">
+            <app-filter
+              *ngFor="let item of filter"
+              (returnValue)="assignNewFilter($event)"
+              [filter]="item"
+            ></app-filter>
+          </div>
+          <div class="p-4 item-footer">
+            <p>درباره ما</p>
+            <p>قوانین و مقررات</p>
+            <p>تماس با ما</p>
+            <p>همکاری</p>
+          </div>
+        </div>
+        <div
+          *ngIf="
+            componentSetting.visualDirectives.routeFrom === 'profile' &&
+            deviceIsPc
+          "
+        >
+          <app-profile-menu></app-profile-menu>
+        </div>
+      </div>
+    </div>
+    <div class="footer-div w-75 justify-content-center d-flex">
+      <div class="w-75 text-right"><app-footer></app-footer></div>
+    </div>
+  </div>
+</div>
+<!--
+  <div class="fix-left">
+    <img src="../assets/img/banner.png" class="w-50">
+  </div>
+-->

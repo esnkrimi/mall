@@ -1,0 +1,36 @@
+<div class="w-100 p-2 text-right">
+  <div class="text-left">
+    <i
+      class="fa fa-close text-white"
+      *ngIf="!deviceIsPc"
+      (click)="hideBranches()"
+    ></i>
+  </div>
+  <div
+    class="text-right w-100 menu-hover"
+    (click)="selectGroupCat(item.id)"
+    [class.active-menu]="item.id === groupIDSelected"
+    [routerLink]="['../']"
+    *ngFor="let item of groupCats"
+  >
+    <div
+      *ngIf="item"
+      class="mr-auto text-right menu-items d-flex justify-content-end w-100"
+    >
+      <div class="text-right item-text">
+        <span>
+          {{ item.title }}
+        </span>
+        <span *ngIf="item?.count > 0" class="text-creamy">
+          ({{ findPersianChar(item?.count) }})</span
+        >
+      </div>
+      <div>
+        <img
+          class="small-icon"
+          [src]="'../../../../assets/img/' + item?.title + '.png'"
+        />
+      </div>
+    </div>
+  </div>
+</div>

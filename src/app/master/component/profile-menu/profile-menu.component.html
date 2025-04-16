@@ -1,0 +1,16 @@
+<div class="w-100 p-2 menu-items">
+  <div
+    class="bg-darker text-white"
+    (click)="gotoRouteWithDelay('feature/post')"
+  >
+    <p>یک تیتراژ جدید بساز</p>
+  </div>
+  <div
+    class="bg-darker text-white"
+    [routerLink]="['/profile/'+userEmail]"
+    (click)="selectProfileFeature(item.path)"
+    *ngFor="let item of profileMenu"
+  >
+    <p>{{ item.name }}</p>
+  </div>
+</div>

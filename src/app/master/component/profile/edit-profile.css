@@ -1,0 +1,24 @@
+
+*{
+    direction: rtl !important;
+}
+.text-muted-light{
+    color: var(--COLOR-MUTED) !important;
+}
+.modal-full{
+    width: 50vh !important;
+}
+input{
+    width: 100% !important;
+    height: 2vh !important;
+}
+::ng-deep input {
+  outline: none !important;
+  width: 100%;
+  border: solid 1px var(--COLOR-GORGEOUS) !important;
+  padding-top: 2vh;
+  background-color:  var(--COLOR-GORGEOUS) !important;
+  padding-bottom: 2vh;
+  padding-right: 2vh;
+  color: var(--COLOR-MUTED) !important;
+}

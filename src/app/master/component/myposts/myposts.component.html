@@ -1,0 +1,13 @@
+<div *ngIf="posts&&posts[0]" class="p-4 bg-darker">
+  <h3 class="w-100 text-right text-light p-4 m-4">پست های من</h3>
+  <div class="row">
+    <div *ngFor="let item of posts; let i = index" class="col-md-3">
+      <div *ngIf="item.id">
+        <app-post-short-unactive
+          [data]="item"
+          [typeOfShow]="'main'"
+        ></app-post-short-unactive>
+      </div>
+    </div>
+  </div>
+</div>

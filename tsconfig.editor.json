@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["backend/src/**/*.ts", "backend/src/app/master/component/login/login.component.ts", "backend/src/libs/widgets/loading-progress-dynamic.component"],
+  "compilerOptions": {},
+  "exclude": ["jest.config.ts", "backend/src/**/*.test.ts", "backend/src/**/*.spec.ts"]
+}

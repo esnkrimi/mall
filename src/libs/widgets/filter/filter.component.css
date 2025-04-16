@@ -1,0 +1,46 @@
+mat-select {
+  border: solid 1px rgb(57, 49, 65) !important;
+  color: white !important;
+}
+.slider {
+  width: 80%;
+  color: red !important;
+}
+.slider {
+  --mdc-slider-handle-color: var(--COLOR-MASTER-FIRST-B);
+  --mdc-slider-active-track-color: green !important;
+  --mdc-slider-inactive-track-color: orange !important;
+}
+.bg-filter {
+  background-color: #3b2e494b;
+}
+::ng-deep mat-select,
+.mat-select {
+  margin-top: 0.5vh !important;
+  border: solid 1px #333 !important;
+  text-align: right !important;
+  color: white !important;
+  height: 4.3vh !important;
+}
+::ng-deep .mat-mdc-option:focus.mdc-list-item,
+.mat-mdc-option.mat-mdc-option-active.mdc-list-item {
+  color: white !important;
+}
+::ng-deep .mat-mdc-option.mdc-list-item {
+  color: white !important;
+}
+::ng-deep div.mat-mdc-select-panel {
+  background-color: var(--COLOR-DARKER) !important;
+  opacity: 1 !important;
+  scrollbar-color: var(--COLOR-MASTER-FIRST-B) var(--COLOR-DARK) !important;
+}
+::ng-deep
+  .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled)
+  .mdc-list-item__primary-text {
+  color: var(--COLOR-MASTER-SECOND-A) !important;
+}
+::ng-deep .mat-mdc-option .mat-pseudo-checkbox {
+  --mat-minimal-pseudo-checkbox-selected-checkmark-color: var(
+    --COLOR-MASTER-FIRST-B
+  ) !important;
+}

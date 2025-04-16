@@ -1,0 +1,43 @@
+<div class="bg-dark p-2 rounded">
+  <div [class.order-first]="!deviceIsPc" class="col-md-12">
+    <div class="w-100 p-2 m-1 text-right text-light">
+      <h4>به چه موضوعاتی علاقمند هستید؟</h4>
+    </div>
+    <div class="w-100 text-right p-2 m-1">
+      <form [formGroup]="formCategory">
+        <mat-form-field class="w-75">
+          <mat-label>مثال : فناوری</mat-label>
+          <input matInput formControlName="category" />
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="d-relative text-right w-100">
+      <div class="d-result-absolute w-100">
+        <div
+          class="p-1 m-1 bg-light cursor-pointer links"
+          *ngFor="let item of categories"
+          (click)="makeCategory({ catid: item?.id, name: item?.name })"
+        >
+          {{ item.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12 border border-black p-1 rounded mt-4">
+    <div class="w-100 text-right p-2 row">
+      <div
+        (click)="removeFromCategory(item?.name)"
+        [class.border]="item !== ''"
+        [class.bg-white]="item !== ''"
+        *ngFor="let item of selectedCategorySet"
+        class="rounded p-1 m-2 col-md-1 links"
+      >
+        <span *ngIf="item !== ''" class="text-danger">
+          {{ item?.name }}
+        </span>
+        <i *ngIf="item !== ''" class="fa fa-close cursor-pointer"></i>
+      </div>
+    </div>
+  </div>
+</div>

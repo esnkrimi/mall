@@ -1,0 +1,195 @@
+.image-icon {
+  width: 15vh !important;
+  height: 15vh !important;
+  margin: auto !important;
+}
+.text-small {
+  font-size: calc(0.79em + 0.09vw) !important;
+  text-justify: initial;
+}
+.chips,
+::ng-deep
+  .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled)
+  .mdc-evolution-chip__text-label {
+  font-size: calc(0.79em + 0.1vw) !important;
+  color: var(--COLOR-DARKER) !important;
+}
+h2 {
+  font-size: calc(1em + 0.29vw) !important;
+  margin-bottom: 1.3vh;
+  font-weight: 600;
+  padding: 1em;
+}
+
+.image-small {
+  width: 2vh;
+  height: 2vh;
+  border-radius: 50%;
+}
+.comments > div {
+  font-size: 1.5vh;
+  padding-left: 1vh;
+  cursor: pointer;
+  color: var(--COLOR-CREAM);
+}
+.text-xl {
+  font-size: 3vh !important;
+}
+.text-like {
+  color: var(--COLOR-RED) !important;
+}
+.text-saves {
+  color: var(--COLOR-GREEN) !important;
+}
+.v-align-middle {
+  vertical-align: middle !important;
+  justify-content: center !important;
+  text-align: center !important;
+  justify-items: center !important;
+  justify-self: center !important;
+}
+.dir-rtl {
+  direction: rtl !important;
+}
+.paragraph {
+  text-align: justify !important;
+  text-justify: inter-word !important;
+  font-size: 1.6vh !important;
+  line-height: 2em;
+  font-family: yekan !important;
+}
+
+.text-area {
+  direction: rtl;
+  text-align: right;
+  background-color: var(--COLOR-DARK) !important;
+  outline: none !important;
+  border-bottom: solid 1px #ffffff !important;
+  color: white;
+  height: 2vh;
+  width: 100% !important;
+  padding: 1em;
+}
+.comment-frame {
+  justify-content: right;
+}
+.image-icon {
+  width: 2vh;
+  height: 2vh;
+  border-radius: 50%;
+  outline: #c9c5c5;
+}
+.comment-frame {
+  vertical-align: middle !important;
+  display: flex;
+}
+.bg-darker {
+  background-color: var(--COLOR-DARKER) !important;
+}
+.bg-dark {
+  background-color: var(--COLOR-DARK) !important;
+}
+.text-xlarge {
+  font-size: 2vh;
+}
+.border-light {
+  border-color: var(--COLOR-LIGHT-DARK) !important;
+}
+.border-darker {
+  border-color: var(--COLOR-DARKER) !important;
+}
+.mrt-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.pr-long {
+  padding-right: 4vh;
+}
+h3 {
+  font-family: different !important;
+  font-size: 2.3vh !important;
+  margin-top: 2vh !important;
+}
+.delete-icon {
+  visibility: visible;
+}
+.attributes-frame > span {
+  padding: 0.2em;
+  margin: 0.2em;
+}
+.attributes-frame {
+  text-align: right;
+  width: 100%;
+}
+.icon-small {
+  width: 3vh;
+  height: 3vh;
+  border-radius: 50%;
+}
+.title-text {
+  font-size: 2vh;
+  padding: 1vh;
+}
+.dir-rtls {
+  direction: rtl !important;
+}
+.animatedFlagLikeClass {
+  animation: colorizeIcon 0.4s forwards;
+}
+.rotateIconClass {
+  animation: rotateIcon 0.4s forwards;
+}
+@media only screen and (max-width: 1200px) {
+  .msg-panel {
+    height: 20vh !important;
+  }
+  .img-full {
+    width: 100%;
+    height: 68vh !important;
+  }
+} 
+
+.msg-panel {
+  height: 30vh;
+}
+.scroller-vertical-msg {
+  height: 100% !important;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll !important;
+  scrollbar-color: var(--COLOR-CREAM) var(--COLOR-DARK) !important;
+  scrollbar-width: thin !important;
+  opacity: 0.8;
+}
+
+.absolute-on-small {
+  padding: 0 !important;
+  background-color: var(--COLOR-DARK-PINK) !important;
+  height: 10vh !important;
+  opacity: 0.8;
+}
+
+.img-full {
+  width: 100%;
+  height: 65vh;
+}
+.scores > span {
+  font-weight: 600;
+  font-family: edwardian !important;
+  font-size: xx-large;
+  color: var(--COLOR-GOLD);
+}
+.scores {
+  bottom: 5% !important;
+  text-align: left !important;
+  justify-content: left !important;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  vertical-align: middle;
+  z-index: 999;
+  justify-content: center;
+  background-color: rgba(26, 23, 53, 0.397);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2x);
+}

@@ -1,0 +1,35 @@
+.menu-items > div {
+  margin: 0.2%;
+  padding: 0.6vh;
+  cursor: pointer;
+  color: white;
+  font-size: 1.5vh;
+  opacity: 0.8;
+}
+.fa-2x {
+  font-size: 2vh !important;
+}
+.item-text:hover {
+  animation: color-change-animation 0.5s forwards;
+}
+@keyframes color-change-animation {
+  0% {
+    color: white;
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.menu-hover:hover,.active-menu {
+  animation: bg-change-animation 1s forwards;
+}
+@keyframes bg-change-animation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    background-color: var(--COLOR-GORGEOUS);
+    opacity: 1;
+  }
+}

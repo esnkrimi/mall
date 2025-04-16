@@ -1,0 +1,48 @@
+<app-loadingProgressDynamic
+  *ngIf="loadingProgressDynamicVar === 'change profile setting'"
+></app-loadingProgressDynamic>
+
+<div class="w-100 bg-gorgeous-color">
+  <div class="w-100 row flex-row-reverse">
+    <div class="col-md-3 p-3 d-relative">
+      <app-loadingProgressDynamic
+        *ngIf="loadingProgressDynamicVar === 'change profile picture'"
+      ></app-loadingProgressDynamic>
+      <img
+        onerror="this.src = '../../../../assets/img/unknown-user.png'"
+        class="w-100 rounded"
+        [src]="
+          'https://burjcrown.com/drm/date/users/' +
+          user?.email +
+          '/user.jpg' +
+          '?ts=' +
+          timestap
+        "
+      />
+    </div>
+    <div class="col-md-9 text-right p-3 info-rows">
+      <div>
+        <span class="text-light text-small">نام </span>
+        <span class="text-light text-small">{{ user?.name }} </span>
+      </div>
+      <div>
+        <span class="text-light text-small">شهرت </span>
+        <span class="text-light text-small">{{ user?.family }} </span>
+      </div>
+      <div>
+        <span class="text-light text-small">{{ user?.email }} </span>
+        <span class="text-light text-small">ایمیل </span>
+      </div>
+      <div>
+        <span class="text-light text-small">شغل </span>
+        <span class="text-light text-small">{{ user?.job }} </span>
+      </div>
+      <div>
+        <span class="text-light text-small">{{ user?.birthdate }} </span>
+        <span class="text-light text-small">شروع فعالیت </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-myposts [posts]="user?.posts"></app-myposts>

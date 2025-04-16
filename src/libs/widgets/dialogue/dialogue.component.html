@@ -1,0 +1,277 @@
+<div
+  *ngIf="data.postId === 'messageBoardListActive'"
+  class="width-response text-white bg-darker p-3"
+>
+  <div class="scroller-vertical">
+    <div *ngFor="let item of messageList">
+      <p
+        class="d-flex w-100"
+        [class.flex-row-reverse]="userLogined === item?.sender"
+      >
+        <span>
+          <img
+            onerror="this.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfwM2108oL7bhv9Ee8QQBC2dCng0jnV0kAow&s'"
+            style="margin-top: auto"
+            [src]="
+              'https://burjcrown.com/drm/date/users/' +
+              item?.sender +
+              '/user.jpg'
+            "
+            class="image-icon cursor-pointer p-1"
+          />
+        </span>
+        :
+        <span
+          class="p-1"
+          [class.text-light-muted]="userLogined === item?.sender"
+        >
+          {{ item?.message }}
+        </span>
+        <span
+          class="p-1 d-flex text-pheosfor-green"
+          *ngIf="userLogined === item?.sender && item?.seen === 'yes'"
+        >
+          <img
+            src="https://www.iconpacks.net/icons/2/free-check-icon-3278-thumb.png"
+            class="image-icon-small mr-auto"
+          />
+        </span>
+      </p>
+    </div>
+  </div>
+  <div>
+    <form class="w-100" [formGroup]="messageForm">
+      <div>
+        <mat-form-field class="w-100 bg-darker">
+          <textarea
+            matInput
+            formControlName="message"
+            class="w-100 bg-light text-blueblack text-right"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="w-100 text-center">
+        <button
+          (click)="sendMessage(data?.email, false)"
+          class="p-4 bg-dark text-light"
+          mat-raised-button
+        >
+          ارسال
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div
+  *ngIf="data.postId === 'messageBoardActive'"
+  class="width-response bg-darker p-3"
+>
+  <div class="w-100 text-light text-left p-2">
+    {{ data?.user?.name }}
+    {{ data?.user?.family }}
+  </div>
+  <div>
+    <form class="w-100" [formGroup]="messageForm">
+      <div>
+        <mat-form-field class="w-100 bg-darker p-2">
+          <textarea
+            matInput
+            formControlName="message"
+            class="textarea-thin overflow-hidden"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="w-100 text-center">
+        <button
+          (click)="sendMessage(data?.user?.email, true)"
+          class="p-4 btn-hoverable"
+          mat-raised-button
+        >
+          ارسال
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div
+  *ngIf="data.postId === 'mustLogin'"
+  class="width-response bg-white m-3 d-relative"
+>
+  <app-loadingProgressDynamic
+    *ngIf="loadingProgressDynamicVar === 'wait login authentication to be done'"
+  ></app-loadingProgressDynamic>
+  <div [class.w-100]="deviceIsPc" class="w-100">
+    <div>
+      <img src="../../../assets/img/bglogo.jpg" class="img-meduim" />
+    </div>
+    <div class="text-right w-100">
+      <form class="w-100" [formGroup]="loginForm">
+        <div class="w-100 text-center d-flex">
+          <div class="w-100 bg-white m-4" *ngIf="formLoginStep === 0">
+            <input
+              matInput
+              placeholder="09123456789"
+              type="number"
+              formControlName="mobile"
+              class="w-100 rounded"
+            />
+          </div>
+          <div class="w-100 bg-white m-4" *ngIf="formLoginStep === 1">
+            <input
+              type="tel"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              required
+              [maxLength]="11"
+              matInput
+              placeholder="کد را وارد نمایید"
+              formControlName="code"
+            />
+          </div>
+        </div>
+        <div class="w-100 text-center" *ngIf="formLoginStep === 0">
+          <button
+            [disabled]="!loginForm.valid"
+            (click)="sendCodeMobile()"
+            class="p-4 links-bg-fade"
+            mat-raised-button
+          >
+            ارسال کد تایید
+          </button>
+        </div>
+
+        <div class="w-100 text-center" *ngIf="formLoginStep === 1">
+          <button
+            (click)="loginViaMobile()"
+            class="p-4 links-bg-fade"
+            mat-raised-button
+          >
+            تایید
+          </button>
+        </div>
+        <br />
+      </form>
+    </div>
+  </div>
+
+  <div
+    *ngIf="data.postId === 'mustLogin'"
+    (click)="signInWithGoogle()"
+    class="m-3 d-flex text-right flex-nowrap pb-2 pt-2 bg-white"
+  >
+    <span class="m-4">
+      <asl-google-signin-button
+        GoogleSigninButtonDirective
+        type="standard"
+        size="large"
+        data-text="ورود با گوگل"
+        data-size="large"
+        data-logo_alignment="right"
+        data-text="ورود با گوگل"
+      >
+      </asl-google-signin-button>
+    </span>
+  </div>
+</div>
+
+<div *ngIf="data.postId === 'imageZoom'" class="w-100 p-2 bg-light d-relative">
+  <img
+    class="corner-left-absolute-div cursor-pointer small-icon" 
+    (click)="close()"
+    src="../../../assets/img/close.png"
+  />
+  <div style="width: 100%; height: 95vh !important">
+    <ng-magnizoom
+      zoomMode="LENS"
+      zoomCenterUnit="PIXEL"
+      [lensSize]="{ width: 0.75, height: 0.75 }"
+      [(zoomCenter)]="position"
+      [(zoomFactor)]="zoom"
+      [imageClass]="'w-100'"
+      class="rounded w-50"
+      imageSrc="{{ data.imgSrc }}"
+    >
+    </ng-magnizoom>
+  </div>
+</div>
+
+<div
+  [class.p-2]="sentenceKnowUsStep !== 1"
+  [class.bg-white]="sentenceKnowUsStep !== 1"
+  [class.bg-transparent]="sentenceKnowUsStep === 1"
+  *ngIf="data.postId === 'knowUs' && displayFrameImage"
+  class="knowus-panel"
+>
+  <div
+    *ngIf="displayFrameImage && showLoadingWaitFlag && deviceIsPc; else goNext"
+  >
+    <img
+      src="../../../assets/img/image-knous/loading-wait.gif"
+      class="img-wait"
+    />
+  </div>
+  <ng-template #goNext>
+    <div
+      [class.pt-2]="sentenceKnowUsStep !== 1"
+      [class.img-frame]="sentenceKnowUsStep !== 1"
+      class="text-center"
+    >
+      <div class="d-relative" [class.pb-3]="sentenceKnowUsStep !== 1">
+        <img
+          [class.img-bg]="sentenceKnowUsStep === 1"
+          [class.img-knowus]="sentenceKnowUsStep !== 1"
+          class="mr-auto"
+          [src]="
+            '../../../assets/img/image-knous/img' + sentenceKnowUsStep + '.gif'
+          "
+        />
+        <span *ngIf="sentenceKnowUsStep === 1" class="absolute-text">
+          {{ outPutAnimatedString }}
+        </span>
+      </div>
+
+      <span class="animated-char text-right dir-rtl w-100">
+        {{ outPutAnimatedString }}
+      </span>
+      <div [class.on-text]="sentenceKnowUsStep === 1" class="w-100 text-center">
+        <button
+          (click)="charAnimatedLoad()"
+          *ngIf="sentenceKnowUsStep === 1"
+          class="mb-4 bg-danger text-light p-4 rounded-circle"
+          mat-raised-button
+        >
+          <span
+            class="text-xlarge"
+            *ngIf="activeNextButton && sentenceKnowUsStep <= 8"
+          >
+            شروع
+          </span>
+
+          <span *ngIf="!activeNextButton">... </span>
+        </button>
+
+        <button
+          *ngIf="sentenceKnowUsStep !== 1"
+          class="mb-4 bg-light text-dark p-4 mt-4"
+          mat-raised-button
+        >
+          <span
+            class="text-xlarge"
+            (click)="charAnimatedLoad()"
+            *ngIf="activeNextButton && sentenceKnowUsStep <= 8"
+          >
+            !رد شو
+          </span>
+          <span
+            class="text-xlarge"
+            (click)="closeEver()"
+            *ngIf="activeNextButton && sentenceKnowUsStep === 9"
+          >
+            ‌! فهمیدم
+          </span>
+          <span *ngIf="!activeNextButton">... </span>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,7 @@
+.menu-items > div {
+  margin: 1%;
+  border-bottom: solid 1px #242424;
+  padding: 1vh;
+  cursor: pointer;
+  color: var(--COLOR-MUTED);
+}

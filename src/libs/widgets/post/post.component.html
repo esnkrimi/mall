@@ -1,0 +1,374 @@
+<div *ngIf="data" class="w-100 p-2 mt-2 bg-dark2 text-right shadow-sm">
+  <div class="row">
+    <div class="col-md-8">
+      <div>
+        <div style="flex-basis: 50%" class="text-left text-light"></div>
+        <div class="m-3 text-right d-relative">
+          <div class="corner-left-absolute-div ml-4">
+            <img
+              *ngIf="data?.groupid !== '1'"
+              src="../../../assets/img/rainbow.png"
+            />
+          </div>
+          <div
+            *ngIf="!commentShowFlag"
+            class="absolute-on absolute-on-left-bottom-corner p-2 cursor-pointer"
+            (click)="commentShowFlag = !commentShowFlag"
+          >
+            <img
+              src="https://assets-v2.lottiefiles.com/a/9277207a-b687-11ee-8971-47c261c5dfbe/LHkmMhfKEi.gif"
+              class="small-icon"
+            />
+          </div>
+          <div
+            *ngIf="commentShowFlag"
+            class="absolute-on absolute-on-left-bottom-corner msg-panel"
+          >
+            <div
+              class="w-100 bg-dark2 text-right scroller-vertical-msg"
+              #scrollerverticalmsg
+              id="scrollerverticalmsg"
+            >
+              <div class="w-100" *ngIf="loginedUser">
+                <div
+                  class="absolute-on absolute-on-left-bottom-corner p-2 cursor-pointer"
+                  (click)="commentShowFlag = !commentShowFlag"
+                >
+                  <img
+                    src="../../../assets/img/comments.gif"
+                    class="small-icon"
+                  />
+                </div>
+                <form class="w-100" [formGroup]="formComment">
+                  <div class="w-100 text-right p-1">
+                    <input
+                      matInput
+                      (keyup.enter)="submitComment()"
+                      formControlName="comment"
+                      class="w-100 text-area mb-1"
+                    />
+                    <div class="w-100 text-right text-light"></div>
+                  </div>
+                </form>
+              </div>
+              <div *ngFor="let item of data?.comments; let i = index">
+                <div
+                  *ngIf="i < commentCounter && item?.comment.length > 0"
+                  class="shadow-sm delete-frame"
+                >
+                  <div class="w-100 dir-rtl text-right dir-rtl">
+                    <div
+                      class="fw-bold pl-2 pr-1 text-light text-smalls d-flex"
+                    >
+                      <span (click)="addUserDestination(item?.email)">
+                        <img
+                          [src]="
+                            'https://burjcrown.com/drm/date/users/' +
+                            item?.email +
+                            '/user.jpg'
+                          "
+                          class="image-small mb-1 ml-2 cursor-pointer"
+                        />
+                      </span>
+                      <span class="text-light-muted mrt-auto cursor-pointer">
+                        {{ item?.comment }}
+                      </span>
+                      <span class="text-light-muted mrt-auto">
+                        <i
+                          (click)="deleteComment(item)"
+                          class="fa fa-trash pr-2 cursor-pointer"
+                        ></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-100 text-right p-2" *ngIf="!loginedUser">
+                <span>برای نظر دادن وارد شوید</span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="absolute-on-left-bottom-corner scores text-left"
+            *ngIf="!commentShowFlag"
+          >
+            <div class="d-flex justify-content-between w-100 p-1">
+              <div>
+                <span
+                  class="text-xxlarge pt-2 pb-2"
+                  *ngFor="let item of returnIteration(data?.score)"
+                >
+                  <i class="fa fa-star text-gold"></i>
+                </span>
+                <span
+                  class="text-xxlarge pt-2 pb-2"
+                  *ngFor="let item of returnIteration(5 - data?.score)"
+                >
+                  <i class="fa fa-star text-dark"></i>
+                </span>
+              </div>
+              <div class="dir-rtl">
+                <span class="text-xxlarge p-2 ml-4 text-gold">
+                  {{ toPersianNumber(data?.viewCount) }}
+                  بازدید
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="absolute-on-small absolute-on-left-top-corner">
+            <div
+              class="d-flex w-100 comments p-2 text-right justify-content-between"
+            >
+              <div class="text-left d-flex">
+                <div class="d-flex v-align-middle">
+                  <span (click)="savePost(data)" class="mr-auto">
+                    <i
+                      [class.animatedFlagLikeClass]="animatedFlagLike"
+                      [class.text-pink]="
+                        userLoginedSavedPost && userLoginedSavedPost?.length > 0
+                      "
+                      [class.text-light-muted]="
+                        userLoginedSavedPost &&
+                        userLoginedSavedPost?.length === 0
+                      "
+                      class="fa fa-3x fa-heart"
+                    ></i>
+                  </span>
+                </div>
+                <div class="d-flex ml-4">
+                  <span (click)="likePost(data)" class="mr-auto">
+                    <i
+                      [class.rotateIconClass]="animatedFlagrotateIcon"
+                      class="fa fa-thumbs-up fa-3x"
+                      [class.text-pink]="
+                        userLoginedLikePost && userLoginedLikePost?.length > 0
+                      "
+                      [class.text-light-muted]="
+                        userLoginedLikePost && userLoginedLikePost?.length === 0
+                      "
+                    ></i>
+                  </span>
+                  <span
+                    class="text-xlarge text-pink mr-auto pl-4"
+                    *ngIf="likeCounter(data?.likes) !== '.'"
+                  >
+                    {{ likeCounter(data?.likes) }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="text-right">
+                <div
+                  class="text-white w-100 text-right text-xxlarge pb-2 dir-rtls d-flex"
+                >
+                  <div>
+                    {{ data?.typeofpost }}
+                    {{ data?.title }}
+                  </div>
+                  -
+                  <div>{{ data?.age }} سال</div>
+                </div>
+                <p class="text-white text-right">
+                  {{ data?.city }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <img
+            (click)="
+              imageZoom(
+                'https://burjcrown.com/drm/date/users/' +
+                  data?.user?.email +
+                  '/' +
+                  data?.id +
+                  '/1.jpg'
+              )
+            "
+            onerror="this.src = '../../../../assets/img/unknown-user.png'"
+            [src]="
+              'https://burjcrown.com/drm/date/users/' +
+              data?.user?.email +
+              '/' +
+              data?.id +
+              '/1.jpg'
+            "
+            class="rounded img-full w-100 cursor-zoom-in mr-auto"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="mr-auto h-100 justify-flex-center-center d-flex text-center">
+        <div class="text-center mb-3">
+          <div class="w-100">
+            <img
+              [routerLink]="['feature/profile/' + data?.user?.email]"
+              [src]="
+                'https://burjcrown.com/drm/date/users/' +
+                data?.user?.email +
+                '/user.jpg'
+              "
+              onerror="this.src = '../../../../assets/img/unknown-user.png'"
+              class="image-icon cursor-pointer mr-auto"
+            />
+          </div>
+          <div class="d-flex v-align-middle mt-4">
+            <div *ngIf="data?.user?.email !== loginedUser">
+              <ng-container *ngIf="!IFollow">
+                <span class="links" *ngIf="deviceIsPc; else shortFollow">
+                  <!--
+                دنبال کن
+                -->
+                </span>
+                <ng-template #shortFollow>
+                  <span class="text-green p-1">
+                    <i class="fa fa-shield fa-1x links"></i>
+                  </span>
+                </ng-template>
+              </ng-container>
+              <ng-container *ngIf="IFollow">
+                <span class="links" *ngIf="deviceIsPc; else shortUnfollow">
+                  حذف دنباله</span
+                >
+                <ng-template #shortUnfollow>
+                  <span class="text-green p-1">
+                    <i class="fa fa-check fa-x text-success"></i>
+                  </span>
+                </ng-template>
+              </ng-container>
+            </div>
+            <div class="dir-rtl">
+              <p class="text-right mr-auto">
+                <span class="text-light text-xxlarge">
+                  {{ data?.user?.name }}
+                </span>
+                <span class="text-light text-xxlarge"
+                  >{{ data?.user?.family }}
+                </span>
+
+                -
+              </p>
+              <p class="text-small text-light">
+                {{ data?.user?.job }}
+              </p>
+ 
+            </div>
+          </div>
+
+          <div class="justify-flex-center-center m-3">
+            <span class="text-danger ml-2">
+              <a [href]="'mailto :' + data?.user?.email2" target="_blank">
+                <i
+                  class="fa fa-envelope fa-2x cursor-pointer links-green"
+                ></i> </a
+            ></span>
+            <span class="text-danger ml-2">
+              <a
+                [href]="'https://whatsapp.com/' + data?.user?.whatsapp"
+                target="_blank"
+              >
+                <i class="fa fa-phone fa-2x cursor-pointer links-green"></i> </a
+            ></span>
+
+            <span class="text-danger ml-2">
+              <a
+                [href]="'https://telegram.me/' + data?.user?.telegram"
+                target="_blank"
+              >
+                <i
+                  class="fa fa-telegram fa-2x cursor-pointer links-green"
+                ></i></a
+            ></span>
+
+            <span class="text-danger ml-2">
+              <a
+                [href]="'https://instagram.com/' + data?.user?.instagram"
+                target="_blank"
+              >
+                <i class="fa fa-instagram fa-2x cursor-pointer links-green"></i>
+              </a>
+            </span>
+
+            <span class="text-danger ml-2">
+              <i
+                class="fa fa-comment fa-2x cursor-pointer links-green"
+                (click)="messageBoardActive(data?.user)"
+              ></i
+            ></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-100 border-dark border-bottom"></div>
+  <div class="mr-1 mt-1 w-100 text-right d-relative">
+    <app-loadingProgressDynamic
+      *ngIf="loadingProgressDynamicVar === 'post content' + data?.date"
+    ></app-loadingProgressDynamic>
+    <div class="d-flex flex-nowrap w-100 cursor-pointer">
+      <div
+        (click)="loadingProgressDynamic('post content' + data?.date)"
+        class="text-light paragraph dir-rtl w-100"
+      >
+        {{ shortcase(data?.content) }}
+      </div>
+    </div>
+
+    <div class="w-100 text-left">
+      <mat-chip-set>
+        <mat-chip
+          class="chips bg-light-pink text-white border border-light"
+          *ngFor="let c of data.category"
+          >{{ c }}</mat-chip
+        >
+      </mat-chip-set>
+    </div>
+    <!-- 
+    <p class="mt-3 mb-1">
+      <span
+      *ngFor="let cat of data?.category"
+      class="bg-light rounded m-1 w-100 text-right text-dark p-1 text-small dir-rtl"
+      >
+      {{ cat }}
+    </span>
+  </p>
+  --></div>
+
+  <div class="d-flex w-100 bg-dark2 mt-4">
+    <div class="col-md-6 text-right d-flex flex-wrap" *ngIf="deviceIsPc">
+      <ng-container *ngFor="let item of attributesOfData; let i = index">
+        <div *ngIf="i >= 12" class="d-flex attributes-frame justify-flex-right">
+          <span class="text-light"> {{ item.postfix }}</span>
+          <span class="text-light"> {{ data[item.field] }}</span>
+          <span class="text-light-muted"> {{ item.title }}</span>
+          <span class="text-light-muted">
+            <img
+              [src]="'../../../assets/img/icon-attr/' + item.field + '.png'"
+              class="icon-small"
+          /></span>
+        </div>
+      </ng-container>
+    </div>
+    <div class="col-md-6 text-right d-flex flex-wrap">
+      <ng-container *ngFor="let item of attributesOfData; let i = index">
+        <div
+          *ngIf="i < 12 || !deviceIsPc"
+          class="d-flex attributes-frame justify-flex-right"
+        >
+          <span class="text-light"> {{ item.postfix }}</span>
+          <span class="text-light"> {{ data[item.field] }}</span>
+          <span class="text-light-muted"> {{ item.title }}</span>
+          <span class="text-light-muted">
+            <img
+              [src]="'../../../assets/img/icon-attr/' + item.field + '.png'"
+              class="icon-small"
+          /></span>
+        </div>
+      </ng-container>
+    </div>
+    <div class="col-md-6"></div>
+  </div>
+</div>
