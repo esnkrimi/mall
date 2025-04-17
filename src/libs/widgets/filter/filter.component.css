@@ -44,3 +44,12 @@ mat-select {
     --COLOR-MASTER-FIRST-B
   ) !important;
 }
+
+::ng-deep .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background {
+    background-color: white !important;
+    border :solid 2px black !important;
+}
+::ng-deep .mdc-checkbox__background {
+    border :solid 1px rgb(94, 92, 92) !important;
+
+}

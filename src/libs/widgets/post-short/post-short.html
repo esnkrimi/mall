@@ -88,7 +88,7 @@
         class="corner-right-absolute-div"
       >
         <i
-          class="fa mr-auto fa-search opacity-45 text-pink bg-black rounded-circle p-2 links-pink cursor-pointer"
+          class="fa mr-auto fa-search opacity-75 links-pink bg-light border rounded-circle p-2 links-pink cursor-pointer"
         ></i>
       </div>
       <div>
@@ -112,7 +112,7 @@
   <div class="properties-frame p-2">
     <div class="text-left d-flex dir-rtl">
       <span>
-        <h2 style="margin-top: auto">{{data?.title}}</h2>
+        <h2 style="margin-top: auto">{{data?.brand}}</h2>
       </span>
     </div>
     <div class="text-left d-flex dir-rtl">
@@ -134,12 +134,19 @@
         <i class="fa fa-star text-light-muted"></i>
       </span>
     </div>
-    <div class="text-left d-flex dir-rtl">
+  <div class="text-left d-flex dir-rtl">
+      <span>
+        <h2 class="text-decoration-line-through" style="margin-top: auto">{{toPersianNumber(data?.price)}}</h2>
+      </span>
+    </div>
+        <div class="text-left d-flex dir-rtl">
       <span>
         <h2 class="price-span" style="margin-top: auto">
-          {{data?.price-((data?.price*data?.discount)/100)}}
+          {{toPersianNumber(data?.price-((data?.price*data?.discount)/100))}}
+          
         </h2>
       </span>
+      <span class="text-light-muted px-2"> تومان</span>
     </div>
   </div>
 </div>

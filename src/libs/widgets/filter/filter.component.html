@@ -37,7 +37,7 @@
         <mat-checkbox
           *ngIf="i < lengthOfFilterItems || lengthOfFilterItems === 0"
           [id]="'id' + item"
-          class="p-1 text-light-muted dir-ltr"
+          class="p-1 text-light-muted dir-rtl"
           (click)="trackFilter($event)"
           [value]="item"
         >
@@ -52,7 +52,7 @@
           lengthOfFilterItems > 0 && filterData.length > lengthOfFilterItems
         "
       >
-        <span class="mr-3 cursor-pointer text-light-muted"> ... </span>
+        <span class="mr-3 cursor-pointer text-muted"> ... </span>
       </div>
     </div>
   </div>

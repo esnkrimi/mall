@@ -3,10 +3,10 @@
   --COLOR-THEME: #e02626;
   --COLOR-LIGHT-RED: #d44642;
   --COLOR-DARK-RED: #b8312b;
-  --COLOR-MASTER-FIRST-A: #e4b96a;
-  --COLOR-MASTER-FIRST-B: #e4b96a;
-  --COLOR-MASTER-SECOND-A:rgba(235, 97, 177, 0.856);
-  --COLOR-MASTER-SECOND-B:  rgba(209, 111, 132, 0.856);
+  --COLOR-MASTER-FIRST-A: #3bec99;
+  --COLOR-MASTER-FIRST-B: #14d47b;
+  --COLOR-MASTER-SECOND-A: rgba(235, 97, 177, 0.856);
+  --COLOR-MASTER-SECOND-B: rgba(209, 111, 132, 0.856);
   --COLOR-DARK-PINK: rgb(90, 67, 87);
   --COLOR-LIGHT-PINK: rgba(255, 98, 229, 0.856);
   --COLOR-DARK-GREEN: #16c784;
@@ -14,7 +14,7 @@
   --COLOR-DARK-ORANGE: #fc9611;
   --COLOR-ORANGE: #fdb42a;
   --COLOR-GOLD: #e4b96a;
-  --COLOR-HOVER: #fc9551;
+  --COLOR-HOVER: #3bec64;
   --COLOR-SHINE-GOLD: #ffb168;
   --COLOR-LIGHT: #ffffff;
   --COLOR-CREAM: #706d6d;
@@ -27,7 +27,7 @@
   --COLOR-LIGHT-DARK: rgb(37, 37, 37);
   --COLOR-MUTED: rgb(102, 104, 102);
   --COLOR-GORGEOUS: #f6f4f8f5;
-  --COLOR-LIGHT-GREEN:  #2ddb0a;
+  --COLOR-LIGHT-GREEN: #2ddb0a;
 }
 @tailwind base;
 @tailwind components;
@@ -128,7 +128,7 @@ button {
     color: var(--COLOR-THEME) !important;
   }
 }
-.bg-master{
+.bg-master {
   background-color: var(--COLOR-MASTER-FIRST-A);
 }
 .animation-fadein {
@@ -244,7 +244,7 @@ button {
   width: 10em;
   height: 8em;
 }
-.img-medum{
+.img-medum {
   width: 8em;
   height: 8em;
 }
@@ -263,7 +263,7 @@ button {
 }
 
 .bg-green {
-  background-color: var(--COLOR-GREEN) !important;
+  background-color: var(--COLOR-MASTER-FIRST-A) !important;
 }
 
 .bg-dark-green {
@@ -576,4 +576,14 @@ button:hover {
   100% {
     scale: 1.06;
   }
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: black !important;
+}
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: black !important;
+}
+::ng-deep .mat-checkbox-ripple .mat-ripple-element {
+  background-color: black !important;
 }

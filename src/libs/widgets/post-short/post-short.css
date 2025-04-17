@@ -306,10 +306,10 @@ h3 {
   margin-top: 0.3vh;
 }
 .properties-frame>div>span{
-  color: #575757 !important;
+  color: #575757 ;
 }
 .price-span{
-  color: black !important;
+  color: black;
   font-size: 2vh !important;
   font-weight: 500 !important;
 }

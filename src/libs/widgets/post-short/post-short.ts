@@ -69,6 +69,7 @@ export class PostShortComponent implements OnChanges {
     @Inject('deviceIsPc') public deviceIsPc: boolean
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.data)
     this.loadingProgressDynamicFetch();
     this.loginedUser = JSON.parse(this.localStorage.getItem('user')!)?.email;
     if (JSON.parse(this.localStorage.getItem('user')!)?.email)
