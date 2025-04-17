@@ -67,120 +67,40 @@ export class PostComponent implements OnChanges, AfterViewInit {
   commentShowFlag = false;
   attributesOfData = [
     {
-      postfix: 'سال',
-      title: 'سن',
-      field: 'age',
-    },
-    {
       postfix: '',
-      title: 'محل زندگی',
-      field: 'city',
-    },
-    {
-      postfix: '',
-      title: 'جنسیت',
-      field: 'typeofpost',
-    },
-    {
-      postfix: '',
-      title: 'جنسیت تیتراژ',
+      title: 'نوع',
       field: 'groups',
-    },
-    {
-      postfix: '',
-      title: 'تایپ',
-      field: 'typeInterrested',
-    },
-    {
-      postfix: '',
-      title: 'تجربه زندگی',
-      field: 'glass',
-    },
-    {
-      postfix: 'میلون تومان ',
-      title: 'درآمد ماهیانه',
-      field: 'price',
-    },
-    {
-      postfix: '',
-      title: 'خانه',
-      field: 'house',
-    },
-    {
-      postfix: '',
-      title: 'اتوموبیل',
-      field: 'car',
-    },
-    {
-      postfix: '',
-      title: 'مهمترین خصوصیت ',
-      field: 'mainattr',
     },
 
     {
       postfix: '',
-      title: 'رنگ چشم',
+      title: 'برند',
       field: 'brand',
     },
     {
       postfix: '',
-      title: 'رنگ مو',
+      title: 'رنگ های موجود',
       field: 'color',
     },
     {
       postfix: '',
-      title: 'اهل نوشیدنی',
+      title: 'رایحه',
       field: 'scent',
     },
     {
       postfix: '',
-      title: 'دخانیات',
+      title: 'مناسب برای',
       field: 'sx',
     },
     {
       postfix: '',
-      title: 'سطح مذهبی',
+      title: 'ساخت',
       field: 'country',
     },
     {
-      postfix: '',
-      title: 'رابطه باز',
+      postfix: '٪',
+      title: 'تخفیف',
       field: 'discount',
-    },
-    {
-      postfix: 'سانتی متر',
-      title: 'قد',
-      field: 'height',
-    },
-    {
-      postfix: 'کیلوگرم',
-      title: 'وزن',
-      field: 'weight',
-    },
-    {
-      postfix: 'سانتی متر',
-      title: 'دور بازو',
-      field: 'arm',
-    },
-    {
-      postfix: 'سانتی متر',
-      title: 'زیر بغل',
-      field: 'armpit',
-    },
-    {
-      postfix: 'سانتی متر',
-      title: 'دور کمر ',
-      field: 'hips',
-    },
-    {
-      postfix: 'سانتی متر',
-      title: 'دور باسن ',
-      field: 'thigh',
-    },
-    {
-      postfix: 'سانتی متر',
-      title: 'دور سینه',
-      field: 'waist',
     },
   ];
   constructor(
@@ -364,7 +284,7 @@ export class PostComponent implements OnChanges, AfterViewInit {
     for (let i = 0; i < count; i++) result.push('1');
     return result;
   }
-  toPersianNumber(num: string) {
+  toPersianNumber(num: any) {
     let result = '';
     const numInt = parseInt(num, 10);
     const toString = String(numInt);

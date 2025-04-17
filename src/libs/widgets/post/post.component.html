@@ -1,4 +1,4 @@
-<div *ngIf="data" class="w-100 p-2 mt-2 bg-dark2 text-right shadow-sm">
+<div *ngIf="data" class="w-100 p-2 mt-2 bg-white border text-right shadow-sm">
   <div class="row">
     <div class="col-md-8">
       <div>
@@ -25,7 +25,7 @@
             class="absolute-on absolute-on-left-bottom-corner msg-panel"
           >
             <div
-              class="w-100 bg-dark2 text-right scroller-vertical-msg"
+              class="w-100 bg-white2 text-right scroller-vertical-msg"
               #scrollerverticalmsg
               id="scrollerverticalmsg"
             >
@@ -136,26 +136,6 @@
                     ></i>
                   </span>
                 </div>
-                <div class="d-flex ml-4">
-                  <span (click)="likePost(data)" class="mr-auto">
-                    <i
-                      [class.rotateIconClass]="animatedFlagrotateIcon"
-                      class="fa fa-thumbs-up fa-3x"
-                      [class.text-pink]="
-                        userLoginedLikePost && userLoginedLikePost?.length > 0
-                      "
-                      [class.text-light-muted]="
-                        userLoginedLikePost && userLoginedLikePost?.length === 0
-                      "
-                    ></i>
-                  </span>
-                  <span
-                    class="text-xlarge text-pink mr-auto pl-4"
-                    *ngIf="likeCounter(data?.likes) !== '.'"
-                  >
-                    {{ likeCounter(data?.likes) }}
-                  </span>
-                </div>
               </div>
 
               <div class="text-right">
@@ -163,15 +143,9 @@
                   class="text-white w-100 text-right text-xxlarge pb-2 dir-rtls d-flex"
                 >
                   <div>
-                    {{ data?.typeofpost }}
                     {{ data?.title }}
                   </div>
-                  -
-                  <div>{{ data?.age }} سال</div>
                 </div>
-                <p class="text-white text-right">
-                  {{ data?.city }}
-                </p>
               </div>
             </div>
           </div>
@@ -202,131 +176,63 @@
     <div class="col-md-4">
       <div class="mr-auto h-100 justify-flex-center-center d-flex text-center">
         <div class="text-center mb-3">
-          <div class="w-100">
-            <img
-              [routerLink]="['feature/profile/' + data?.user?.email]"
-              [src]="
-                'https://burjcrown.com/drm/mall/users/' +
-                data?.user?.email +
-                '/user.jpg'
-              "
-              onerror="this.src = '../../../../assets/img/unknown-user.png'"
-              class="image-icon cursor-pointer mr-auto"
-            />
-          </div>
+          <div class="justify-flex-center-center">
           <div class="d-flex v-align-middle mt-4">
-            <div *ngIf="data?.user?.email !== loginedUser">
-              <ng-container *ngIf="!IFollow">
-                <span class="links" *ngIf="deviceIsPc; else shortFollow">
-                  <!--
-                دنبال کن
-                -->
+              <p >
+                <span class="mr-3 text-xxlarge text-decoration-line-through text-light-muted">
+                  {{ toPersianNumber(data?.price) }}
                 </span>
-                <ng-template #shortFollow>
-                  <span class="text-green p-1">
-                    <i class="fa fa-shield fa-1x links"></i>
-                  </span>
-                </ng-template>
-              </ng-container>
-              <ng-container *ngIf="IFollow">
-                <span class="links" *ngIf="deviceIsPc; else shortUnfollow">
-                  حذف دنباله</span
-                >
-                <ng-template #shortUnfollow>
-                  <span class="text-green p-1">
-                    <i class="fa fa-check fa-x text-success"></i>
-                  </span>
-                </ng-template>
-              </ng-container>
-            </div>
-            <div class="dir-rtl">
-              <p class="text-right mr-auto">
-                <span class="text-light text-xxlarge">
-                  {{ data?.user?.name }}
+                   <span class="bg-danger rounded-circle p-1 mr-auto ">
+                  {{ toPersianNumber(data?.discount) }}%
                 </span>
-                <span class="text-light text-xxlarge"
-                  >{{ data?.user?.family }}
-                </span>
-
-                -
               </p>
-              <p class="text-small text-light">
-                {{ data?.user?.job }}
-              </p>
- 
             </div>
           </div>
-
-          <div class="justify-flex-center-center m-3">
-            <span class="text-danger ml-2">
-              <a [href]="'mailto :' + data?.user?.email2" target="_blank">
-                <i
-                  class="fa fa-envelope fa-2x cursor-pointer links-green"
-                ></i> </a
-            ></span>
-            <span class="text-danger ml-2">
-              <a
-                [href]="'https://whatsapp.com/' + data?.user?.whatsapp"
-                target="_blank"
-              >
-                <i class="fa fa-phone fa-2x cursor-pointer links-green"></i> </a
-            ></span>
-
-            <span class="text-danger ml-2">
-              <a
-                [href]="'https://telegram.me/' + data?.user?.telegram"
-                target="_blank"
-              >
-                <i
-                  class="fa fa-telegram fa-2x cursor-pointer links-green"
-                ></i></a
-            ></span>
-
-            <span class="text-danger ml-2">
-              <a
-                [href]="'https://instagram.com/' + data?.user?.instagram"
-                target="_blank"
-              >
-                <i class="fa fa-instagram fa-2x cursor-pointer links-green"></i>
-              </a>
-            </span>
-
-            <span class="text-danger ml-2">
-              <i
-                class="fa fa-comment fa-2x cursor-pointer links-green"
-                (click)="messageBoardActive(data?.user)"
-              ></i
-            ></span>
+          <div class="d-flex v-align-middle mt-1">
+            <div class="justify-flex-center-center m-1">
+              <p class="text-xxlarge">
+                {{
+                  toPersianNumber(
+                    data?.price - (data?.price * data?.discount) / 100
+                  )
+                }}
+                تومان
+              </p>
+            </div>
+          </div>
+          <div class="">
+            <button mat-raised-button class="big-btn">
+              افزودن به سبد حرید
+            </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="w-100 border-dark border-bottom"></div>
-  <div class="mr-1 mt-1 w-100 text-right d-relative">
-    <app-loadingProgressDynamic
-      *ngIf="loadingProgressDynamicVar === 'post content' + data?.date"
-    ></app-loadingProgressDynamic>
-    <div class="d-flex flex-nowrap w-100 cursor-pointer">
-      <div
-        (click)="loadingProgressDynamic('post content' + data?.date)"
-        class="text-light paragraph dir-rtl w-100"
-      >
-        {{ shortcase(data?.content) }}
-      </div>
-    </div>
-
-    <div class="w-100 text-left">
-      <mat-chip-set>
-        <mat-chip
-          class="chips bg-light-pink text-white border border-light"
-          *ngFor="let c of data.category"
-          >{{ c }}</mat-chip
+    <div class="w-100 border-dark border-bottom"></div>
+    <div class="mr-1 mt-1 w-100 text-right d-relative">
+      <app-loadingProgressDynamic
+        *ngIf="loadingProgressDynamicVar === 'post content' + data?.date"
+      ></app-loadingProgressDynamic>
+      <div class="d-flex flex-nowrap w-100 cursor-pointer">
+        <div
+          (click)="loadingProgressDynamic('post content' + data?.date)"
+          class="text-light paragraph dir-rtl w-100"
         >
-      </mat-chip-set>
-    </div>
-    <!-- 
+          {{ shortcase(data?.content) }}
+        </div>
+      </div>
+
+      <div class="w-100 text-left">
+        <mat-chip-set>
+          <mat-chip
+            class="chips bg-light-pink text-white border border-light"
+            *ngFor="let c of data.category"
+            >{{ c }}</mat-chip
+          >
+        </mat-chip-set>
+      </div>
+      <!-- 
     <p class="mt-3 mb-1">
       <span
       *ngFor="let cat of data?.category"
@@ -335,40 +241,37 @@
       {{ cat }}
     </span>
   </p>
-  --></div>
+  -->
+    </div>
 
-  <div class="d-flex w-100 bg-dark2 mt-4">
-    <div class="col-md-6 text-right d-flex flex-wrap" *ngIf="deviceIsPc">
-      <ng-container *ngFor="let item of attributesOfData; let i = index">
-        <div *ngIf="i >= 12" class="d-flex attributes-frame justify-flex-right">
-          <span class="text-light"> {{ item.postfix }}</span>
-          <span class="text-light"> {{ data[item.field] }}</span>
-          <span class="text-light-muted"> {{ item.title }}</span>
-          <span class="text-light-muted">
-            <img
-              [src]="'../../../assets/img/icon-attr/' + item.field + '.png'"
-              class="icon-small"
-          /></span>
-        </div>
-      </ng-container>
+    <div class="d-flex w-100 bg-white mt-4 p-4">
+      <div class="col-md-6 text-right d-flex flex-wrap" *ngIf="deviceIsPc">
+        <ng-container *ngFor="let item of attributesOfData; let i = index">
+          <div
+            *ngIf="i >= 12"
+            class="d-flex attributes-frame justify-flex-right"
+          >
+            <span class="text-dark2"> {{ item.postfix }}</span>
+            <span class="text-dark2"> {{ data[item.field] }}</span>
+            <span class="text-dark2-muted"> {{ item.title }}</span>
+
+          </div>
+        </ng-container>
+      </div>
+      <div class="col-md-6 text-right d-flex flex-wrap">
+        <ng-container *ngFor="let item of attributesOfData; let i = index">
+          <div
+            *ngIf="i < 12 || !deviceIsPc"
+            class="d-flex attributes-frame justify-flex-right"
+          >
+            <span class="text-dark2"> {{ item.postfix }}</span>
+            <span class="text-dark2"> {{ data[item.field] }}</span>
+            <span class="text-dark2-muted"> {{ item.title }}</span>
+    
+          </div>
+        </ng-container>
+      </div>
+      <div class="col-md-6"></div>
     </div>
-    <div class="col-md-6 text-right d-flex flex-wrap">
-      <ng-container *ngFor="let item of attributesOfData; let i = index">
-        <div
-          *ngIf="i < 12 || !deviceIsPc"
-          class="d-flex attributes-frame justify-flex-right"
-        >
-          <span class="text-light"> {{ item.postfix }}</span>
-          <span class="text-light"> {{ data[item.field] }}</span>
-          <span class="text-light-muted"> {{ item.title }}</span>
-          <span class="text-light-muted">
-            <img
-              [src]="'../../../assets/img/icon-attr/' + item.field + '.png'"
-              class="icon-small"
-          /></span>
-        </div>
-      </ng-container>
-    </div>
-    <div class="col-md-6"></div>
   </div>
 </div>

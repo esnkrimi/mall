@@ -295,8 +295,13 @@ select {
 button,
 .mat-mdc-raised-button:not(:disabled) {
   height: 2vh;
+  width: 100%;
+  font-size: 1.5vh !important;
   vertical-align: middle !important;
-  background-color: var(--COLOR-DARKER);
+  color: white !important;
+  font-family: yekan !important;
+  background-color: var(--COLOR-DARK-GREEN) !important;
+  padding: 2.3vh !important;
 }
 button:hover {
   animation: bacolor-change-pink 0.2s forwards !important;
