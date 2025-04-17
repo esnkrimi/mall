@@ -243,7 +243,6 @@ export class DialogContentEditProfile {
     const userLogined: any = this.localstorage.getItem('user');
     const userLoginedEmail: string = JSON.parse(userLogined).email;
     formObject = { ...formObject, email: userLoginedEmail };
-    console.log(formObject);
     setTimeout(() => {
       this.store.dispatch(
         actions.prepareUpdateProfile({ formObject: formObject })

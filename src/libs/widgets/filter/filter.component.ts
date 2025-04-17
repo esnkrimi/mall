@@ -29,6 +29,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -62,6 +63,7 @@ import { BrowserModule } from '@angular/platform-browser';
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
+    MatCheckboxModule,
     MatFormField,
     MatChipsModule,
     RouterModule,
@@ -80,7 +82,7 @@ export class FilterComponent implements OnChanges {
   filterData: any = [];
   filterValueMin: any;
   filterValueMax: any;
-  filterValue: any;
+  filterValue: any = '';
   rangeData: any = [];
   provinces: IProvince[] = [];
   cities: any = [];
@@ -121,8 +123,20 @@ export class FilterComponent implements OnChanges {
   changeProvince(provinceid: any) {
     this.store.dispatch(actions.prepareFetchCity({ provinceid: provinceid }));
   }
-  trackFilter() {
+  trackFilter(val: any) {
     this.router.navigate(['']);
+    if (this.filterValue.includes(val.target.value)) {
+      this.filterValue = this.filterValue.replace(',' + val.target.value, '');
+      this.filterValue = this.filterValue.replace(val.target.value + ',', '');
+      this.filterValue = this.filterValue.replace(val.target.value, '');
+    } else {
+      if (this.filterValue) this.filterValue += ',';
+      this.filterValue += val.target.value;
+    }
+    this.filterValue = this.filterValue.replace(',,', ',');
+      this.filterValue = this.filterValue.replace(',undefined', '');
+      this.filterValue = this.filterValue.replace('undefined,', '');
+
     if (this.filterValueMax === undefined) this.filterValueMax = '100000';
     if (this.filterValueMin === undefined) this.filterValueMin = '0';
     this.returnValue.emit({
@@ -137,7 +151,6 @@ export class FilterComponent implements OnChanges {
     this.store.select(selectFilters).subscribe((res: any) => {
       const tmp1 = res.filter((res: any) => res.name === this.filter.name);
       this.filterData = tmp1[0].values;
-      console.log(this.filterData);
       // this.fetchRange(res, this.filter?.name);
     });
   }

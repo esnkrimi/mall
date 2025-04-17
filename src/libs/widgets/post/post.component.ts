@@ -314,7 +314,6 @@ export class PostComponent implements OnChanges, AfterViewInit {
   likeComment(commentId: any) {}
 
   deleteComment(comment: any) {
-    console.log(comment);
     this.loadingProgressDynamicService.loadingProgressActiveation(
       'change post type'
     );

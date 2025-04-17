@@ -1028,7 +1028,7 @@ function fetch_experiences_by_public($con, $offset, $groupId, $typeOfPost, $user
         $and = " and ";
 
     $lastCondition = $addSql . $and . $addSqlTypeExp;
-    $sql = "SELECT * FROM exp where id>0 $lastCondition $conditionFilter order by id desc LIMIT 20 OFFSET $offset"; // echo $sql;
+    $sql = "SELECT * FROM exp where id>0 $lastCondition $conditionFilter order by id desc LIMIT 20 OFFSET $offset";//  echo $sql;
     if ($result = $con->QUERY_RUN($con, $sql)) {
         while ($row = $result->fetch_object()) {
             $tempArray = $row;
@@ -1119,18 +1119,23 @@ function fetch_experiences($con)
                 } else {
                     $cond .= $filter[$i]->name . "='" . $filter[$i]->value . "'";
                 } else {
-                $cond .= $filter[$i]->name . " like '%" . $filter[$i]->value . "%'";
+                $tmp1 = explode(",", $filter[$i]->value);
+                // echo $tmp1[0];
+                for ($j = 0; $j < count($tmp1); $j++) {
+                    $cond .= $filter[$i]->name . " like '%" . $tmp1[$j] . "%'";
+                    if ($tmp1[$j + 1])
+                        $cond .= ' or ';
+                }
             }
+
+
+
+
         }
 
     }
-    if (strcmp($seed, 'public') != 0) {
-        if (strcmp($userEmail, 'undefined') != 0)
-            $result = fetch_experiences_by_interresting_cats($con, $offset, $groupId, $typeOfPost, $userEmail, $cond);//var_dump($arrayInterrestedPosts);
-    } else {
-        $result = fetch_experiences_by_public($con, $offset, $groupId, $typeOfPost, $userEmail, $cond);//var_dump($arrayInterrestedPosts);    
-    }
 
+    $result = fetch_experiences_by_public($con, $offset, $groupId, $typeOfPost, $userEmail, $cond);//var_dump($arrayInterrestedPosts);  
     if (strcmp($sort, 'new') == 0) {
         usort($result, "cmp");
     } else if (strcmp($sort, 'like') == 0)

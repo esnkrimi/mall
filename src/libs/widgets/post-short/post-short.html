@@ -1,7 +1,4 @@
-<div
-  *ngIf="data"
-  class="w-100 p-3 mt-2 bg-dark frame-item text-right shadow-sm"
->
+<div *ngIf="data" class="w-100 mt-2 border frame-item text-right">
   <div class="d-flex">
     <div style="flex-basis: 10%" class="text-left text-light">
       <!-- 
@@ -39,18 +36,55 @@
     </div>
     <div class="text-right d-relative">
       <div class="absolute-on-left-bottom-corner scores text-left">
-        <span
-          class="text-small p-2"
-          *ngFor="let item of returnIteration(data?.score)"
-        >
-          <i class="fa fa-star fa-2x shadow-lg"></i>
-        </span>
+        <div class="d-flex w-100 m-2 pl-2 comments">
+          <div class="d-relative">
+            <span (click)="savePost(data)" class="text-medum">
+              <i
+                [class.animatedFlagLikeClass]="animatedFlagLike"
+                [class.text-pink]="
+                        userLoginedSavedPost && userLoginedSavedPost?.length > 0
+                      "
+                [class.text-darker]="
+                        userLoginedSavedPost &&
+                        userLoginedSavedPost?.length === 0
+                      "
+                class="fa fa-heart animatedFlagLike links-pink"
+              ></i>
+            </span>
+          </div>
+          <div class="d-relative">
+            <span (click)="likePost(data?.id)" class="text-medum">
+              <i
+                class="fa fa-thumbs-up links-pink"
+                [class.text-pink]="
+            userLoginedLikePost && userLoginedLikePost?.length > 0
+          "
+              ></i>
+            </span>
+
+            <span *ngIf="likeCounter(data?.likes)!=='.'">
+              {{ likeCounter(data?.likes) }}
+            </span>
+          </div>
+          <div
+            class="d-relative right-justify"
+            (click)="showDetails=!showDetails"
+          >
+            <i
+              *ngIf="showDetails"
+              class="fa fa-eye fa-eye-slash fa-2x text-pink opacity-45"
+            ></i>
+            <i
+              *ngIf="!showDetails"
+              class="fa fa-eye opacity-45 fa-2x links-pink text-pink"
+            ></i>
+          </div>
+        </div>
       </div>
       <div class="corner-left-absolute-div">
-        <img
-          *ngIf="data?.groupid!=='1'"
-          src="../../../assets/img/rainbow.png"
-        />
+        <span class="text-danger text-xxlarge fw-bold ml-2" *ngIf="data?.discount>0">
+          {{data?.discount}}%
+        </span>
       </div>
       <div
         (click)="
@@ -85,56 +119,37 @@
     </div>
   </div>
 
-  <div class="d-flex w-100 pt-2 mt-2 comments">
-    <div class="d-relative">
-      <span (click)="savePost(data)" class="text-medum">
-        <i
-          [class.animatedFlagLikeClass]="animatedFlagLike"
-          [class.text-pink]="
-                        userLoginedSavedPost && userLoginedSavedPost?.length > 0
-                      "
-          [class.text-darker]="
-                        userLoginedSavedPost &&
-                        userLoginedSavedPost?.length === 0
-                      "
-          class="fa fa-heart animatedFlagLike links-pink opacity-75"
-        ></i>
+  <div class="properties-frame p-2">
+    <div class="text-left d-flex dir-rtl">
+      <span>
+        <h2 style="margin-top: auto">{{data?.title}}</h2>
       </span>
     </div>
-    <div class="d-relative">
-      <span (click)="likePost(data?.id)" class="text-medum">
-        <i
-          class="fa fa-thumbs-up links-pink opacity-65"
-          [class.text-pink]="
-            userLoginedLikePost && userLoginedLikePost?.length > 0
-          "
-        ></i>
-      </span>
-
-      <span *ngIf="likeCounter(data?.likes)!=='.'">
-        {{ likeCounter(data?.likes) }}
+    <div class="text-left d-flex dir-rtl">
+      <span>
+        <h2 style="margin-top: auto">{{data?.title}}</h2>
       </span>
     </div>
-    <div class="d-relative right-justify" (click)="showDetails=!showDetails">
-      <i
-        *ngIf="showDetails"
-        class="fa fa-eye fa-eye-slash fa-2x text-pink opacity-45"
-      ></i>
-      <i
-        *ngIf="!showDetails"
-        class="fa fa-eye opacity-45 fa-2x links-pink text-pink"
-      ></i>
+    <div class="text-left d-flex dir-rtl">
+      <span
+        class="text-small"
+        *ngFor="let item of returnIteration(data?.score)"
+      >
+        <i class="fa fa-star fa-star-gold"></i>
+      </span>
+      <span
+        class="text-small"
+        *ngFor="let item of returnIteration(5-data?.score)"
+      >
+        <i class="fa fa-star text-light-muted"></i>
+      </span>
     </div>
-
+    <div class="text-left d-flex dir-rtl">
+      <span>
+        <h2 class="price-span" style="margin-top: auto">
+          {{data?.price-((data?.price*data?.discount)/100)}}
+        </h2>
+      </span>
+    </div>
   </div>
-       <div class="text-left d-flex dir-rtl">
-        <span>
-          <h3 style="margin-top: auto">{{data?.title}}</h3>
-        </span>
-      </div>
-     <div class="text-left d-flex dir-rtl">
-        <span>
-          <h3 style="margin-top: auto">{{data?.brand}}</h3>
-        </span>
-      </div>
 </div>

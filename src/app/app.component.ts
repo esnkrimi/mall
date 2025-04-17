@@ -150,17 +150,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  @HostListener('window:scroll', ['$event'])
-  takeScroller(event: any) {
-    // console.debug("Scroll Event", document.body.scrollTop);
-    // see András Szepesházi's comment below
-    if (!(window.pageYOffset < window.innerHeight / 2)) {
-      this.classScrollerDeactive = false;
-    } else {
-      this.classScrollerDeactive = true;
-    }
-  }
-
   assignNewFilter(filter: any) {
     this.filterAssigned = this.filterAssigned.filter(
       (res: any) => res.title !== filter.title

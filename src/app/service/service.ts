@@ -184,10 +184,6 @@ export class ApiService {
     );
   }
   submitNewPost(formValues: any, formData: any) {
-    console.log(
-      `https://burjcrown.com/drm/mall/index.php?id=6&userid=${formValues.userEmail}&category=${formValues.category}&groupid=${formValues.group}&title=${formValues.title}&content=${formValues.content}&color=${formValues.color}&brand=${formValues.brand}&&sizes=${formValues.sizes}&&price=${formValues.price}&&material=${formValues.material}&sx=${formValues.sx}&scent=${formValues.scent}&country=${formValues.country}&discount=${formValues.discount}`,
-
-    )
     return this.http.post(
       `https://burjcrown.com/drm/mall/index.php?id=6&userid=${formValues.userEmail}&category=${formValues.category}&groupid=${formValues.group}&title=${formValues.title}&content=${formValues.content}&color=${formValues.color}&brand=${formValues.brand}&&sizes=${formValues.sizes}&&price=${formValues.price}&&material=${formValues.material}&sx=${formValues.sx}&scent=${formValues.scent}&country=${formValues.country}&discount=${formValues.discount}`,
       formData

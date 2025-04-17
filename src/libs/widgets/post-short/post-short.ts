@@ -179,7 +179,7 @@ export class PostShortComponent implements OnChanges {
     return ch;
   }
 
-  toPersianNumber(num: string) {
+  toPersianNumber(num: any) {
     let result = '';
     const toString = String(num);
     for (let i = 0; i < toString.length; i++) {

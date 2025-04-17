@@ -295,6 +295,18 @@ h3 {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10x);
 }
-.fa-star {
+.fa-star-gold {
   color: var(--COLOR-SHINE-GOLD) !important;
+}
+
+.properties-frame>div{
+  margin-top: 0.3vh;
+}
+.properties-frame>div>span{
+  color: #575757 !important;
+}
+.price-span{
+  color: black !important;
+  font-size: 2vh !important;
+  font-weight: 500 !important;
 }

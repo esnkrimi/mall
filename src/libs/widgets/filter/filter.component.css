@@ -1,5 +1,5 @@
 mat-select {
-  border: solid 1px rgb(57, 49, 65) !important;
+  border: solid 1px rgba(211, 209, 212, 0.527) !important;
   color: white !important;
 }
 .slider {
@@ -19,15 +19,15 @@ mat-select {
   margin-top: 0.5vh !important;
   border: solid 1px #333 !important;
   text-align: right !important;
-  color: white !important;
+  color: var(--COLOR-BLUEBLACK) !important;
   height: 4.3vh !important;
 }
 ::ng-deep .mat-mdc-option:focus.mdc-list-item,
 .mat-mdc-option.mat-mdc-option-active.mdc-list-item {
-  color: white !important;
+  color: var(--COLOR-BLUEBLACK) !important;
 }
 ::ng-deep .mat-mdc-option.mdc-list-item {
-  color: white !important;
+  color: var(--COLOR-BLUEBLACK) !important;
 }
 ::ng-deep div.mat-mdc-select-panel {
   background-color: var(--COLOR-DARKER) !important;

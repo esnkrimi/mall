@@ -2,7 +2,7 @@
   margin: 0.2%;
   padding: 0.6vh;
   cursor: pointer;
-  color: white;
+  color: var(--COLOR-BLUEBLACK);
   font-size: 1.5vh;
   opacity: 0.8;
 }

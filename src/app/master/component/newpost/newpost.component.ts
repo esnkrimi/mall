@@ -215,7 +215,6 @@ export class NewpostComponent implements OnInit {
     for (let i = 0; i < this.myFiles.length; i++) {
       formData.append('file[]', this.myFiles[i]);
     }
-    console.log(this.formNewPost.value)
 
     this.store.dispatch(
       actions.prepareToSubmitPost({

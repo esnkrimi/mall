@@ -21,12 +21,12 @@
   --COLOR-BLUEBLACK: #0d3d50;
   --COLOR-BLUE: #6295f3;
   --COLOR-MAGENTA: rgb(13, 23, 46);
-  --COLOR-DARK: #3b2e494b;
+  --COLOR-DARKER: #ffffff;
+  --COLOR-DARK: #f3f1f5;
   --COLOR-DARK-TWO: #1a1d29ad;
-  --COLOR-DARKER: #0d1421;
   --COLOR-LIGHT-DARK: rgb(37, 37, 37);
   --COLOR-MUTED: rgb(102, 104, 102);
-  --COLOR-GORGEOUS: #3b2e494b;
+  --COLOR-GORGEOUS: #f6f4f8f5;
   --COLOR-LIGHT-GREEN:  #2ddb0a;
 }
 @tailwind base;
@@ -399,7 +399,7 @@ button:hover {
   }
 }
 ::ng-deep div.mat-mdc-select-panel {
-  background-color: var(--COLOR-DARK) !important;
+  background-color: var(--COLOR-BLUEBLACK) !important;
   scrollbar-color: var(--COLOR-MASTER-FIRST-B) var(--COLOR-DARK) !important;
 }
 .scroller-vertical {

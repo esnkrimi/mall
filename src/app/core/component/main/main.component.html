@@ -39,14 +39,16 @@
         class="bg-light-pink text-darker border"
       >
         {{ groupCategoryName }}
-        <i class="fa fa-close cursor-pointer links-pink "></i>
+        <i class="fa fa-close cursor-pointer links-pink"></i>
       </mat-chip>
     </div>
     <ng-container *ngIf="postDatas?.length === 0">
-      <img
-        src="../../../../assets/img/notfound.png"
-        class="mr-auto opacity-low"
-      />
+      <!-- 
+    <img
+    src="../../../../assets/img/notfound.png"
+    class="mr-auto opacity-low"
+    />
+    -->
     </ng-container>
     <ng-container>
       <div class="row">
@@ -69,10 +71,12 @@
               class="w-100 p-4"
               *ngIf="this.componentSetting.settingVariables.offset === 0"
             >
+              <!-- 
               <img
                 class="mr-auto opacity-low rounded w-50"
                 src="../../../../assets/img/notfound.png"
               />
+          -->
             </div>
           </ng-template>
         </div>
