@@ -79,6 +79,7 @@ import { BrowserModule } from '@angular/platform-browser';
 export class FilterComponent implements OnChanges {
   @Input() filter: any;
   @Output() returnValue = new EventEmitter<any>();
+  lengthOfFilterItems = 4;
   filterData: any = [];
   filterValueMin: any;
   filterValueMax: any;
@@ -123,6 +124,18 @@ export class FilterComponent implements OnChanges {
   changeProvince(provinceid: any) {
     this.store.dispatch(actions.prepareFetchCity({ provinceid: provinceid }));
   }
+  trackFilterSlide() {
+    this.router.navigate(['']);
+    if (this.filterValueMax === undefined) this.filterValueMax = '100000';
+    if (this.filterValueMin === undefined) this.filterValueMin = '0';
+    this.returnValue.emit({
+      title: this.filter.title,
+      name: this.filter.name,
+      value: this.filterValue,
+      valueMax: this.filterValueMax,
+      valueMin: this.filterValueMin,
+    });
+  }
   trackFilter(val: any) {
     this.router.navigate(['']);
     if (this.filterValue.includes(val.target.value)) {
@@ -134,8 +147,8 @@ export class FilterComponent implements OnChanges {
       this.filterValue += val.target.value;
     }
     this.filterValue = this.filterValue.replace(',,', ',');
-      this.filterValue = this.filterValue.replace(',undefined', '');
-      this.filterValue = this.filterValue.replace('undefined,', '');
+    this.filterValue = this.filterValue.replace(',undefined', '');
+    this.filterValue = this.filterValue.replace('undefined,', '');
 
     if (this.filterValueMax === undefined) this.filterValueMax = '100000';
     if (this.filterValueMin === undefined) this.filterValueMin = '0';
@@ -146,6 +159,9 @@ export class FilterComponent implements OnChanges {
       valueMax: this.filterValueMax,
       valueMin: this.filterValueMin,
     });
+  }
+  isSelected(item: string) {
+    return this.filterValue.includes(item);
   }
   fetchFiltersSelect() {
     this.store.select(selectFilters).subscribe((res: any) => {

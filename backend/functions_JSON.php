@@ -955,8 +955,8 @@ function doFavouritePost($con, $postId, $userEmail)
     $res = isExistsInFavourite($con, $userid);
     if ($res == 0)
         $sql = "insert into favourite values($id,$userid,$row->groupid,'$row->typeofpost',$row->height	,$row->weight	,'$row->hair'	,'$row->eye'	,'$row->glass'	,$row->waist	,$row->hips	,$row->arm	,$row->armpit	,$row->thigh	,'$row->tatto'	,'$row->smoke'	,'$row->drink'
-       ,'$row->region'	,'$row->openrelation'	,'$row->mainattr'	,$row->income	,'$row->car'	,'$row->house'	,'$row->sport'	,$row->age
-       )";
+           ,'$row->region'	,'$row->openrelation'	,'$row->mainattr'	,$row->income	,'$row->car'	,'$row->house'	,'$row->sport'	,$row->age
+           )";
     else
         $sql = "update favourite set groupid=$row->groupid,typeofpost='$row->typeofpost',height=(height+$row->height)/2 where userid=$userid";
     echo $sql;
@@ -1066,7 +1066,7 @@ function fetch_experiences_by_interresting_cats($con, $offset, $groupId, $typeOf
 
     $lastCondition = $addSql . $and2 . $addSqlTypeExp;
     $sql = "select * from( SELECT userid,catid,email FROM user_category join user on user_category.userid=user.id)as t1 JOIN ( SELECT userid as userid2, groupid, title, content, confirm, typeofpost,date, expid,expid as id, catid FROM exp join exp_category on exp_category.expid=exp.id) as t2 on t1.userid=t2.userid2 and t1.catid=t2.catid
- where email='$userEmail' $and1 $lastCondition $conditionFilter LIMIT 20 OFFSET $offset"; //echo $sql;
+     where email='$userEmail' $and1 $lastCondition $conditionFilter LIMIT 20 OFFSET $offset"; //echo $sql;
     if ($result = $con->QUERY_RUN($con, $sql)) {
         while ($row = $result->fetch_object()) {
             $tempArray = $row;
@@ -1115,12 +1115,11 @@ function fetch_experiences($con)
             $cond .= ' and ';
             if (strcmp($filter[$i]->name, "price") == 0)
                 if ((!$filter[$i]->value)) {
-                    $cond .= $filter[$i]->name . '<=' . $filter[$i]->valueMax . " and " . $filter[$i]->name . '>=' . $filter[$i]->valueMin;
+                    $cond .= "price-(price*discount/100)<=" . $filter[$i]->valueMax . " and  price-(price*discount/100)  >=" . $filter[$i]->valueMin;
                 } else {
                     $cond .= $filter[$i]->name . "='" . $filter[$i]->value . "'";
                 } else {
                 $tmp1 = explode(",", $filter[$i]->value);
-                // echo $tmp1[0];
                 for ($j = 0; $j < count($tmp1); $j++) {
                     $cond .= $filter[$i]->name . " like '%" . $tmp1[$j] . "%'";
                     if ($tmp1[$j + 1])
@@ -1134,6 +1133,7 @@ function fetch_experiences($con)
         }
 
     }
+    //                 echo $cond;
 
     $result = fetch_experiences_by_public($con, $offset, $groupId, $typeOfPost, $userEmail, $cond);//var_dump($arrayInterrestedPosts);  
     if (strcmp($sort, 'new') == 0) {

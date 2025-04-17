@@ -36,7 +36,7 @@
     </div>
     <div class="text-right d-relative">
       <div class="absolute-on-left-bottom-corner scores text-left">
-        <div class="d-flex w-100 m-2 pl-2 comments">
+        <div class="d-flex w-100 m-1 pl-1 comments">
           <div class="d-relative">
             <span (click)="savePost(data)" class="text-medum">
               <i
@@ -52,37 +52,26 @@
               ></i>
             </span>
           </div>
-          <div class="d-relative">
-            <span (click)="likePost(data?.id)" class="text-medum">
-              <i
-                class="fa fa-thumbs-up links-pink"
-                [class.text-pink]="
-            userLoginedLikePost && userLoginedLikePost?.length > 0
-          "
-              ></i>
-            </span>
-
-            <span *ngIf="likeCounter(data?.likes)!=='.'">
-              {{ likeCounter(data?.likes) }}
-            </span>
-          </div>
           <div
             class="d-relative right-justify"
             (click)="showDetails=!showDetails"
           >
             <i
               *ngIf="showDetails"
-              class="fa fa-eye fa-eye-slash fa-2x text-pink opacity-45"
+              class="fa fa-eye fa-eye-slash fa-2x text-pink"
             ></i>
             <i
               *ngIf="!showDetails"
-              class="fa fa-eye opacity-45 fa-2x links-pink text-pink"
+              class="fa fa-eye fa-2x links-pink text-pink"
             ></i>
           </div>
         </div>
       </div>
       <div class="corner-left-absolute-div">
-        <span class="text-danger text-xxlarge fw-bold ml-2" *ngIf="data?.discount>0">
+        <span
+          class="text-danger text-xxlarge fw-bold ml-2"
+          *ngIf="data?.discount>0"
+        >
           {{data?.discount}}%
         </span>
       </div>
@@ -104,6 +93,7 @@
       </div>
       <div>
         <img
+          class="img-thumb cursor-pointer"
           [id]="data?.id"
           onerror="this.src = '../../../assets/img/girl.png'"
           (click)="gotoRouteWithDelay('feature/zoom/' + data?.id)"

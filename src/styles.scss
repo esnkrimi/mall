@@ -59,7 +59,7 @@
   color: var(--COLOR-MASTER-SECOND-B);
 }
 .text-light-muted {
-  color: #686565;
+  color: #d8d6d693;
 }
 .bg-light-dark {
   background-color: var(--COLOR-LIGHT-DARK);
@@ -561,5 +561,14 @@ button:hover {
     color: var(--COLOR-DARK-ORANGE);
     transform: rotate(5deg);
     scale: 1;
+  }
+}
+
+@keyframes scaleAnimation {
+  0% {
+    scale: 1;
+  }
+  100% {
+    scale: 1.06;
   }
 }

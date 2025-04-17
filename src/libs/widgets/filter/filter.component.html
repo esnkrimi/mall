@@ -1,11 +1,11 @@
 <ng-container [ngSwitch]="filter?.type">
   <div class="mb-2 w-100">
     <div *ngSwitchCase="'slide'" class="text-light mt-3">
-      <p class="text-light-muted text-small pr-2 fw-bold">
+      <p class="text-muted text-small pr-2 fw-bold">
         {{ filter.title }} ({{ filter.postfix }})
       </p>
       <mat-slider
-        (change)="trackFilter('')"
+        (change)="trackFilterSlide()"
         class="slider"
         [min]="filter.min"
         [max]="filter.max"
@@ -30,17 +30,29 @@
       </mat-slider>
     </div>
     <div *ngSwitchCase="'select'" class="text-light mt-3 p-1">
-      <p class="text-light-muted text-small pr-2 fw-bold">
+      <p class="text-muted text-small pr-2 fw-bold">
         {{ filter.title }}
       </p>
-      <div *ngFor="let item of filterData">
+      <div *ngFor="let item of filterData; let i = index" class="dir-ltr">
         <mat-checkbox
+          *ngIf="i < lengthOfFilterItems || lengthOfFilterItems === 0"
           [id]="'id' + item"
-          class="p-1 text-light-muted"
+          class="p-1 text-light-muted dir-ltr"
           (click)="trackFilter($event)"
           [value]="item"
-          >{{ item }}</mat-checkbox
         >
+          <span [class.fw-bold]="isSelected(item)">
+            {{ item }}
+          </span>
+        </mat-checkbox>
+      </div>
+      <div
+        (click)="lengthOfFilterItems = 0"
+        *ngIf="
+          lengthOfFilterItems > 0 && filterData.length > lengthOfFilterItems
+        "
+      >
+        <span class="mr-3 cursor-pointer text-light-muted"> ... </span>
       </div>
     </div>
   </div>

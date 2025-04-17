@@ -40,7 +40,7 @@ select {
   font-size: 1.4vh !important;
   padding: 0 !important;
   background-color: var(--COLOR-DARKER);
-  color: white;
+  color: var(--COLOR-BLUEBLACK);
   border: solid 1px var(--COLOR-DARK);
   font-family: yekan;
   height: 3.8vh !important;
