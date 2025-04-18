@@ -12,7 +12,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LocalStorageService } from 'src/app/service/localstorage.service';
 import { Store } from '@ngrx/store';
 import { actions } from 'src/app/+state/action';
-import { selectFollows } from 'src/app/+state/select';
+import { selectBasket,selectFollows } from 'src/app/+state/select';
 import { interval, map } from 'rxjs';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -51,6 +51,7 @@ export class PostComponent implements OnChanges, AfterViewInit {
   @Input() postId: any;
   @Input() typeOfShow: any;
   data: any;
+  basketCount = 0;
   animatedFlagLike = false;
   animatedFlagrotateIcon = false;
   userLoginedLikePost: any;
@@ -60,6 +61,7 @@ export class PostComponent implements OnChanges, AfterViewInit {
   loadingProgressDynamicVar = '';
   shortcaseForm = true;
   IFollow = false;
+  waitToAddToBasket = false;
   loginedUser: any;
   formComment = new FormGroup({
     comment: new FormControl(''),
@@ -114,13 +116,15 @@ export class PostComponent implements OnChanges, AfterViewInit {
     this.scrollToBottom();
   }
   ngOnChanges(changes: SimpleChanges): void {
+    this.loginedUser = JSON.parse(this.localStorage.getItem('user')!)?.email;
+    this.loadBsketAction(this.loginedUser);
+    this.loadBasketSelect();
     const intv = interval(10000).subscribe((res) => {
       actions.preparingLoadComment({ postId: this.postId });
     });
     this.loadComments();
     this.loadingProgressDynamicFetch();
     this.checkSex();
-    this.loginedUser = JSON.parse(this.localStorage.getItem('user')!)?.email;
 
     this.fetchFollowersSelect();
   }
@@ -183,6 +187,46 @@ export class PostComponent implements OnChanges, AfterViewInit {
         this.loadingProgressDynamicVar = res;
       }
     );
+  }
+  addRemoveBasket(
+    user: string,
+    productID: string,
+    size: string,
+    count: number
+  ) {
+    this.store.dispatch(
+      actions.preparingAddRemoveBasket({
+        user,
+        productID,
+        size,
+        count,
+      })
+    );
+  }
+  loadBasketSelect() {
+    this.store.select(selectBasket).subscribe((res) => console.log(res));
+  }
+  loadBsketAction(user: string) {
+    this.store.dispatch(
+      actions.preparingLoadBasket({
+        user,
+      })
+    );
+  }
+  increaseBsket() {
+    //SHOUD addRemoveBasket
+    this.waitToAddToBasket = true;
+    setTimeout(() => {
+      this.waitToAddToBasket = false;
+      this.basketCount++;
+    }, 1000);
+  }
+  decreaseBsket() {
+    this.waitToAddToBasket = true;
+    setTimeout(() => {
+      this.waitToAddToBasket = false;
+      this.basketCount--;
+    }, 1000);
   }
 
   likePost(post: any) {

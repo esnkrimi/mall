@@ -6,6 +6,12 @@ export const ExpState = createFeature({
   name: 'store',
   reducer: createReducer(
     AppState,
+    on(actions.loadBasket, function (state: any, action: any) {
+      return {
+        ...state,
+        basket: action.basket,
+      };
+    }),
     on(actions.loadComment, function (state: any, action: any) {
       return {
         ...state,

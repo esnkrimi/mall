@@ -7,6 +7,31 @@ import { ApiService } from '../service/service';
 @Injectable()
 export class storeEffects {
   constructor(private actions$: Actions, private apiService: ApiService) {}
+  addBasket: any = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(actions.preparingAddRemoveBasket),
+      switchMap((res: any) => {
+        return this.apiService
+          .addRemoveBasket(res.user, res.productID, res.size, res.count)
+          .pipe(
+            map((res2: any) =>
+              actions.loadComment({ comments: res2, postId: res.postId })
+            )
+          );
+      })
+    );
+  });
+
+  loadBasket: any = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(actions.preparingLoadBasket),
+      switchMap((res: any) => {
+        return this.apiService
+          .loadBasket(res.user)
+          .pipe(map((res2: any) => actions.loadBasket({ basket: res2 })));
+      })
+    );
+  });
 
   loadComments: any = createEffect(() => {
     return this.actions$.pipe(
@@ -14,7 +39,11 @@ export class storeEffects {
       switchMap((res: any) => {
         return this.apiService
           .loadCommentOfPost(res.postId)
-          .pipe(map((res2: any) => actions.loadComment({ comments: res2,postId: res.postId})));
+          .pipe(
+            map((res2: any) =>
+              actions.loadComment({ comments: res2, postId: res.postId })
+            )
+          );
       })
     );
   });

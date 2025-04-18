@@ -23,6 +23,7 @@ export const AppState: IState = {
   citySelectedOfProvince: [],
   filters: [],
   userBoard: [],
+  basket: []
 };
 export interface IProvince {
   province_id: string;
@@ -57,6 +58,7 @@ export interface IState {
   message: IMessages[];
   allMessage: IAllMessages[];
   UserLoginedSavedPosts: IUserLoginedSavedPosts[];
+  basket:IBasket[]
 }
 export interface IGroupCats {
   title: string;
@@ -80,7 +82,13 @@ export interface IUserBoard {
   interrests?: IPostCategory[];
   posts: any;
 }
-
+export interface IBasket {
+  size:number
+  count:number
+  produceID:string
+  produceBrand:string
+  produceName:string
+}
 export interface IUser {
   id?: string;
   email: string;

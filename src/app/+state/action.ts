@@ -1,13 +1,21 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { IComments, IPost, IUser, loginHandle } from './state';
+import { IBasket, IComments, IPost, IUser } from './state';
 
 export const actions = createActionGroup({
   source: 'store',
   events: {
-    'load comment':props<{comments:IComments[],postId:string}>(),
-    'preparing load comment':props<{postId:string}>(),
+    'preparing add remove basket': props<{
+      user: string;
+      productID: string;
+      size: string;
+      count: number;
+    }>(),
+    'load basket': props<{ basket: IBasket[] }>(),
+    'preparing load basket': props<{ user: string }>(),
+    'load comment': props<{ comments: IComments[]; postId: string }>(),
+    'preparing load comment': props<{ postId: string }>(),
     'seen message': props<{ post: any }>(),
-    'prepare to seen message': props<{ sender: string,receiver:string }>(),    
+    'prepare to seen message': props<{ sender: string; receiver: string }>(),
     'fetch user board': props<{ user: any }>(),
     'prepare to fetch user board': props<{ email: any }>(),
     'fetch all filter distinct in exp table': props<{ filters: any }>(),

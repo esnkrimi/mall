@@ -209,6 +209,27 @@ export class ApiService {
   fetchFilters() {
     return this.http.get(this.baseUrl + 'id=27');
   }
+  loadBasket(user: string) {
+    return this.http.get(this.baseUrl + 'id=31&user=' + user);
+  }
+  addRemoveBasket(
+    user: string,
+    productID: string,
+    size: string,
+    count: number
+  ) {
+    return this.http.get(
+      this.baseUrl +
+        'id=32&user=' +
+        user +
+        '&productID=' +
+        productID +
+        '&size=' +
+        size +
+        '&count=' +
+        count
+    );
+  }
   searchPostByWord(word: string) {
     const timestap = new Date().getSeconds();
     return this.http.get(
@@ -230,7 +251,7 @@ export class ApiService {
     seed: string,
     filter: string
   ): Observable<any> {
-       console.log(
+    console.log(
       this.baseUrl +
         'id=1&offset=' +
         offet +

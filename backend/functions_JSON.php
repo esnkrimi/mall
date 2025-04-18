@@ -3,6 +3,71 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
+function isExistsInBasket($con, $user, $productID)
+{
+    $sql = "SELECT * FROM basket where userid=$user,expid=$productID";// echo $sql;
+    if ($result = $con->QUERY_RUN($con, $sql)) {
+        $rows = $result->fetch_object();
+        if ($rows->id)
+            return $rows->id;
+    }
+    return 0;
+}
+function addremoveBasket($con)
+{
+    $user = $_GET['user'];
+    $productID = $_GET['productID'];
+    $size = $_GET['size'];
+    $count = $_GET['count'];
+    $resultArray = array();
+    $tempArray = array();
+    if ($count > 0)
+        $condCount = 'count=count-1';
+    else
+        $condCount = 'count=count+1';
+    if (isExistsInBasket($con, $user, $productID))
+        $sql = "update basket set " . $condCount . " where userid='$user' and expid=$productID"; // echo $sql;
+    else
+        $sql = "insert into basket values($id,$productID,$count,$size,$user)"; // echo $sql;
+    $result = $con->QUERY_RUN($con, $sql);
+    $sql = "delete from basket where count<=0"; // echo $sql;
+    $result = $con->QUERY_RUN($con, $sql);
+    loadBasketByParameter($user);
+}
+
+function loadBasketByParameter($con, $user)
+{
+    $resultArray = array();
+    $tempArray = array();
+    $sql = "SELECT * FROM basket where userid='$user'"; // echo $sql;
+    if ($result = $con->QUERY_RUN($con, $sql)) {
+        while ($row = $result->fetch_object()) {
+            $tempArray = $row;
+            array_push($resultArray, $row);
+        }
+    }
+    $t = json_encode($resultArray);
+    if (strlen($t) != 2)
+        echo $t;
+}
+
+function loadBasket($con)
+{
+    $user = $_GET['user'];
+    $resultArray = array();
+    $tempArray = array();
+    $sql = "SELECT * FROM basket where userid='$user'"; // echo $sql;
+    if ($result = $con->QUERY_RUN($con, $sql)) {
+        while ($row = $result->fetch_object()) {
+            $tempArray = $row;
+            array_push($resultArray, $row);
+        }
+    }
+    $t = json_encode($resultArray);
+    if (strlen($t) != 2)
+        echo $t;
+}
+
 function loadCommentOfPost($con)
 {
     $postId = $_GET['postId'];

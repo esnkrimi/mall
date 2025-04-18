@@ -177,12 +177,14 @@
       <div class="mr-auto h-100 justify-flex-center-center d-flex text-center">
         <div class="text-center mb-3">
           <div class="justify-flex-center-center">
-          <div class="d-flex v-align-middle mt-4">
-              <p >
-                <span class="mr-3 text-xxlarge text-decoration-line-through text-light-muted">
+            <div class="d-flex v-align-middle mt-4">
+              <p>
+                <span
+                  class="mr-3 text-xxlarge text-decoration-line-through text-light-muted"
+                >
                   {{ toPersianNumber(data?.price) }}
                 </span>
-                   <span class="bg-danger rounded-circle p-1 mr-auto ">
+                <span class="bg-danger rounded-circle p-1 mr-auto">
                   {{ toPersianNumber(data?.discount) }}%
                 </span>
               </p>
@@ -200,15 +202,31 @@
               </p>
             </div>
           </div>
-          <div class="">
-            <button mat-raised-button class="big-btn">
-              افزودن به سبد حرید
+          <div *ngIf="basketCount === 0">
+            <button (click)="increaseBsket()" mat-raised-button class="big-btn">
+              <span *ngIf="!waitToAddToBasket"> افزودن به سبد حرید </span>
+              <span *ngIf="waitToAddToBasket">
+                <img src="../../../assets/img/loading.gif" class="small-icon mr-auto" />
+              </span>
             </button>
+          </div>
+          <div *ngIf="basketCount > 0">
+            <span *ngIf="waitToAddToBasket">
+              <img src="../../../assets/img/loading.gif" class="small-icon mr-auto" />
+            </span>
+
+            <div
+              *ngIf="!waitToAddToBasket"
+              class="d-flex basket-frame w-100 p-2 m-1"
+            >
+              <span (click)="decreaseBsket()">-</span>
+              <span>{{ basketCount }}</span>
+              <span (click)="increaseBsket()"> +</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
     <div class="w-100 border-dark border-bottom"></div>
     <div class="mr-1 mt-1 w-100 text-right d-relative">
       <app-loadingProgressDynamic
@@ -254,7 +272,6 @@
             <span class="text-dark2"> {{ item.postfix }}</span>
             <span class="text-dark2"> {{ data[item.field] }}</span>
             <span class="text-dark2-muted"> {{ item.title }}</span>
-
           </div>
         </ng-container>
       </div>
@@ -267,7 +284,6 @@
             <span class="text-dark2"> {{ item.postfix }}</span>
             <span class="text-dark2"> {{ data[item.field] }}</span>
             <span class="text-dark2-muted"> {{ item.title }}</span>
-    
           </div>
         </ng-container>
       </div>

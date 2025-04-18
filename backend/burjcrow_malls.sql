@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 16, 2025 at 03:28 PM
+-- Generation Time: Apr 18, 2025 at 04:59 PM
 -- Server version: 5.7.43-log
 -- PHP Version: 8.1.32
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `burjcrow_malls`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `basket`
+--
+
+CREATE TABLE `basket` (
+  `id` int(11) NOT NULL,
+  `expid` int(11) NOT NULL,
+  `count` int(11) NOT NULL,
+  `size` text NOT NULL,
+  `userid` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `basket`
+--
+
+INSERT INTO `basket` (`id`, `expid`, `count`, `size`, `userid`) VALUES
+(1, 1, 5, '2xl', 'esnkrimi@gmail.com'),
+(2, 2, 3, '2xl', 'esnkrimi@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -936,7 +958,8 @@ INSERT INTO `comment` (`id`, `userid`, `comment`, `useriddest`, `expid`, `likeco
 (131, 1, 'vfgregb', 0, 60, 0),
 (132, 1, 'vfgregb]', 0, 60, 0),
 (133, 1, 'vfgregb]', 0, 60, 0),
-(134, 1, 'ss', 0, 60, 0);
+(134, 1, 'ss', 0, 60, 0),
+(135, 1, 'hi', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -968,11 +991,13 @@ CREATE TABLE `exp` (
 --
 
 INSERT INTO `exp` (`id`, `userid`, `groupid`, `title`, `content`, `date`, `confirm`, `color`, `brand`, `sizes`, `price`, `material`, `sx`, `scent`, `country`, `discount`) VALUES
-(1, 1, 1, 'brut', '', '20250416153058', 1, 'green,blue', 'brandBrut', '2x,3x', 25, 'ج۱', 'women', 'گ۲', 'Germany', 5),
-(2, 1, 1, 'Azzaro', '', '20250416153236', 1, 'green,blue', 'brandBrut', '2x,4x', 25000000, 'ج۱', 'women', 'گ۲', 'Germany', 5),
-(3, 1, 1, 'brut', '', '20250416154205', 1, 'red,blue', 'brandBrut', '2x,3x', 10000000, 'ج۱', 'women', 'گ۲', 'Germany', 5),
-(4, 1, 1, 'brut', '', '20250416154445', 1, 'red,blue', 'brandBrut', '2x,3x', 10000000, 'ج۱', 'women', 'گ۲', 'Germany', 5),
-(5, 1, 1, 'brut', '', '20250416154453', 1, 'red,blue', 'brandBrut', '2x,3x', 10000000, 'ج۱', 'women', 'گ۲', 'Japan', 5);
+(1, 1, 1, 'بروت', '', '20250416153058', 1, 'green,blue', 'brandBrut', '2x,3x', 25, 'ج۱', 'women', 'گ۲', 'Germany', 5),
+(2, 1, 1, 'Azzaro', '', '20250416153236', 1, 'red,yellow', 'brandBrut', '2x,4x', 25000000, 'ج۱', 'women', 'گ۲', 'Japan', 5),
+(3, 1, 1, 'بروت', '', '20250416153058', 1, 'green,blue', 'brandBrut', '2x,3x', 25, 'ج۱', 'women', 'گ۲', 'Spain', 5),
+(4, 1, 1, 'لالیک', '', '20250416153058', 1, 'green,blue', 'brandBrut', '2x,3x', 25, 'ج۱', 'women', 'گ۲', 'Usa', 5),
+(5, 1, 1, 'Tomford', '', '20250416153058', 1, 'green,blue', 'brandBrut', '2x,3x', 25, 'ج۱', 'women', 'گ۲', 'Sweden', 5),
+(6, 1, 1, 'Adidas', '', '20250416153058', 1, 'green,blue', 'brandBrut', '2x,3x', 25, 'ج۱', 'women', 'گ۲', 'Sweden', 5),
+(7, 1, 1, 'Amitis', '', '20250416153058', 1, 'green,blue', 'brandBrut', '2x,3x', 25, 'ج۱', 'women', 'گ۲', 'Switzerland', 5);
 
 -- --------------------------------------------------------
 
@@ -1239,7 +1264,6 @@ INSERT INTO `saves` (`useremail`, `expid`) VALUES
 ('esnkrimi@gmail.com', 13),
 ('esnkrimi@gmail.com', 14),
 ('esnkrimi@gmail.com', 14),
-('9188108019', 6),
 ('9188108019', 15),
 ('esnkrimi@gmail.com', 26),
 ('9188108019', 49),
@@ -1258,7 +1282,8 @@ INSERT INTO `saves` (`useremail`, `expid`) VALUES
 ('9188108019', 53),
 ('9188108019', 60),
 ('9188108019', 59),
-('9188108019', 1);
+('9188108019', 1),
+('9188108019', 6);
 
 -- --------------------------------------------------------
 
@@ -1319,6 +1344,12 @@ INSERT INTO `user_category` (`id`, `userid`, `catid`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `basket`
+--
+ALTER TABLE `basket`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `category`
