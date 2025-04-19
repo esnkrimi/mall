@@ -205,3 +205,14 @@ h3 {
     animation: bgcolor-change-reverse 1s forwards;
   }
 }
+
+::ng-deep mat-select,
+.mat-select {
+  margin-top: 0.5vh !important;
+  text-align: right !important;
+  color: var(--COLOR-BLUEBLACK) !important;
+  height: 4.3vh !important;
+}
+::ng-deep .mat-select, .mat-select[_ngcontent-ng-c1881285310]{
+  border: solid 2px red !important;
+}

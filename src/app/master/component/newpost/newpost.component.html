@@ -81,22 +81,42 @@
               formControlName="brand"
             />
           </div>
-          <div class="animation-fadein field-div">
-            <label class="bg-gorgeous-color text-creamy w-100 p-2"> رنگ</label>
-            <mat-select formControlName="color" multiple>
-              <mat-option selected value="green"> سبز</mat-option>
-              <mat-option value="blue"> آبی</mat-option>
-              <mat-option value="yellow"> زرد</mat-option>
-            </mat-select>
+          <div class="border-3 border-black">
+            <div class="animation-fadein field-div">
+              <label class="bg-gorgeous-color text-creamy w-100 p-2">
+                رنگ</label
+              >
+              <mat-select formControlName="color" >
+                <mat-option selected value="green"> سبز</mat-option>
+                <mat-option value="blue"> آبی</mat-option>
+                <mat-option value="yellow"> زرد</mat-option>
+              </mat-select>
+            </div>
+            <div class="animation-fadein field-div">
+              <label class="bg-gorgeous-color text-creamy w-100 p-2">
+                سایز</label
+              >
+              <mat-select formControlName="sizes" >
+                <mat-option selected value="2x"> 2x</mat-option>
+                <mat-option value="3x"> 3x</mat-option>
+                <mat-option value="4x"> 4x</mat-option>
+              </mat-select>
+            </div>
+            <div class="animation-fadein field-div">
+              <label class="bg-gorgeous-color text-creamy w-100 p-2">
+                تعداد</label
+              >
+              <mat-select formControlName="count" >
+                <mat-option selected value="1"> 1</mat-option>
+                <mat-option value="2"> 2</mat-option>
+                <mat-option value="3"> 3</mat-option>
+              </mat-select>
+            </div>
+            <div>
+              <button (click)="addExists()" mat-raised-button>اضافه کن</button>
+            </div>
           </div>
-          <div class="animation-fadein field-div">
-            <label class="bg-gorgeous-color text-creamy w-100 p-2"> سایز</label>
-            <mat-select formControlName="sizes" multiple>
-              <mat-option selected value="2x"> 2x</mat-option>
-              <mat-option value="3x"> 3x</mat-option>
-              <mat-option value="4x"> 4x</mat-option>
-            </mat-select>
-          </div>
+
           <div class="animation-fadein field-div">
             <h3 class="p-2 m-1 text-white">قیمت</h3>
             <input #price id="price" matInput formControlName="price" />

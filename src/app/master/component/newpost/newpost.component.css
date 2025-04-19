@@ -27,7 +27,7 @@ input {
   background-color: var(--COLOR-GORGEOUS);
   padding-bottom: 2vh;
   padding-right: 2vh;
-  color: var(--COLOR-MUTED) !important;
+  color: black !important;
 }
 * {
   text-align: right !important;
@@ -74,7 +74,7 @@ mat-option {
   margin-right: 0 !important;
   border: none !important;
   text-align: right !important;
-  color: white !important;
+  color: black !important;
 }
 ::ng-deep div.mat-mdc-select-panel {
   background-color: var(--COLOR-DARKER) !important;
@@ -104,7 +104,7 @@ input {
   margin: 0 !important;
   background-color: var(--COLOR-GORGEOUS) !important;
   border-bottom: solid 0.3px var(--COLOR-MASTER-FIRST-B) !important;
-  color: white !important;
+  color: black !important;
 }
 .img-newpost {
   width: 90vh;

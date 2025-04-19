@@ -12,7 +12,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { LocalStorageService } from 'src/app/service/localstorage.service';
 import { Store } from '@ngrx/store';
 import { actions } from 'src/app/+state/action';
-import { selectBasket,selectFollows } from 'src/app/+state/select';
+import { selectBasket, selectFollows } from 'src/app/+state/select';
 import { interval, map } from 'rxjs';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +26,10 @@ import { LoadingProgressDynamic } from '../loading-progress-dynamic.component/lo
 import { MatChipsModule } from '@angular/material/chips';
 import jalaliMoment from 'jalali-moment';
 import { selectZoom } from 'src/app/+state/select';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-post',
@@ -34,6 +38,7 @@ import { selectZoom } from 'src/app/+state/select';
     MatDialogModule,
     MatButtonModule,
     CommonModule,
+    FormsModule,
     LoadingProgressDynamic,
     GoogleSigninButtonModule,
     MatFormField,
@@ -43,6 +48,8 @@ import { selectZoom } from 'src/app/+state/select';
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
+    MatOptionModule,
+    MatSelectModule,
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css',
@@ -60,12 +67,15 @@ export class PostComponent implements OnChanges, AfterViewInit {
   userLoginedSavedPost: any;
   loadingProgressDynamicVar = '';
   shortcaseForm = true;
+  sizeSelected = '';
+  colorSelected = '';
   IFollow = false;
   waitToAddToBasket = false;
   loginedUser: any;
   formComment = new FormGroup({
     comment: new FormControl(''),
   });
+  ceilOfRequest = 0;
   commentShowFlag = false;
   attributesOfData = [
     {
@@ -115,6 +125,7 @@ export class PostComponent implements OnChanges, AfterViewInit {
   ngAfterViewInit(): void {
     this.scrollToBottom();
   }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.loginedUser = JSON.parse(this.localStorage.getItem('user')!)?.email;
     this.loadBsketAction(this.loginedUser);
@@ -156,11 +167,14 @@ export class PostComponent implements OnChanges, AfterViewInit {
       .select(selectZoom)
       .pipe(map((res: any) => res.filter((res: any) => res.id === postid)))
       .subscribe((r) => {
+        console.log(this.data);
         this.data = r[r.length - 1];
+        this.sizeSelected = this.data?.sizes[0];
+        this.colorSelected = this.data?.color[0];
         this.setLikeSavePost();
-        this.store.dispatch(
+        /*   this.store.dispatch(
           actions.preparingLoadComment({ postId: this.postId })
-        );
+        );*/
       });
   }
   scrollToBottom() {
@@ -192,6 +206,7 @@ export class PostComponent implements OnChanges, AfterViewInit {
     user: string,
     productID: string,
     size: string,
+    color: any,
     count: number
   ) {
     this.store.dispatch(
@@ -199,6 +214,7 @@ export class PostComponent implements OnChanges, AfterViewInit {
         user,
         productID,
         size,
+        color,
         count,
       })
     );
@@ -214,19 +230,45 @@ export class PostComponent implements OnChanges, AfterViewInit {
     );
   }
   increaseBsket() {
-    //SHOUD addRemoveBasket
+    this.ceilOfRequest--;
+    const loginedUser = JSON.parse(this.localStorage.getItem('user')!)?.email;
+    this.addRemoveBasket(
+      loginedUser,
+      this.postId,
+      this.sizeSelected,
+      this.colorSelected,
+      1
+    );
     this.waitToAddToBasket = true;
     setTimeout(() => {
       this.waitToAddToBasket = false;
       this.basketCount++;
     }, 1000);
   }
+
   decreaseBsket() {
+    this.ceilOfRequest++;
+    const loginedUser = JSON.parse(this.localStorage.getItem('user')!)?.email;
+    this.addRemoveBasket(
+      loginedUser,
+      this.postId,
+      this.sizeSelected,
+      this.colorSelected,
+      -1
+    );
     this.waitToAddToBasket = true;
     setTimeout(() => {
       this.waitToAddToBasket = false;
       this.basketCount--;
     }, 1000);
+  }
+  selectSize(sizeSelected: any) {
+    this.colorSelected = sizeSelected?.value?.color;
+    const result = this.data?.sizeExists.filter(
+      (res: any) =>
+        res.size === this.sizeSelected && res.color === this.colorSelected
+    );
+    this.ceilOfRequest = result[0].count;
   }
 
   likePost(post: any) {

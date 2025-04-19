@@ -37,20 +37,22 @@ export class NewpostComponent implements OnInit {
     title: new FormControl('', Validators.required),
     category: new FormControl(''),
     content: new FormControl('', Validators.required),
-    color: new FormControl('مشکی'),
-    brand: new FormControl('مشکی'),
+    color: new FormControl(''),
+    count: new FormControl('1'),
+    brand: new FormControl(''),
     sizes: new FormControl('A'),
     price: new FormControl('10'),
-    material: new FormControl('بدون تتو'),
+    material: new FormControl(''),
     sx: new FormControl('اصلا'),
     scent: new FormControl('اصلا'),
-    country: new FormControl('معتدل باشد'),
-    discount: new FormControl('موافق باشد'),
+    country: new FormControl('iran'),
+    discount: new FormControl('0'),
     cityid: new FormControl(''),
     provinceid: new FormControl(''),
   });
   @ViewChild('title') titleInput: ElementRef | undefined;
   @ViewChild('content') content: ElementRef | undefined;
+  existsSet: any = [];
   myFiles: any = [];
   groupCats: any = [];
   categories: any = [];
@@ -119,11 +121,19 @@ export class NewpostComponent implements OnInit {
       }
     });
   }
+  addExists() {
+    this.existsSet.push({
+      size: this.formNewPost.get('sizes')?.value,
+      color: this.formNewPost.get('color')?.value,
+      count: this.formNewPost.get('count')?.value,
+    });
+    console.log(this.existsSet);
+  }
   setSex(sex: string) {
     this.formNewPost.get('sx')?.setValue(sex);
     this.sexSelected = sex;
-    this.showSexStepChangedProgress()
-  } 
+    this.showSexStepChangedProgress();
+  }
   makeCategory(item: any) {
     this.selectedCategory.push(item);
     this.lockStep = true;
@@ -218,6 +228,7 @@ export class NewpostComponent implements OnInit {
 
     this.store.dispatch(
       actions.prepareToSubmitPost({
+        existsSet: this.existsSet,
         formValues: this.formNewPost.value,
         formData: formData,
       })

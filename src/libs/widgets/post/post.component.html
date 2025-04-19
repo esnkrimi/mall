@@ -202,17 +202,62 @@
               </p>
             </div>
           </div>
+          <div class="d-flex v-align-middle mt-1 w-100">
+            <div class="justify-flex-center-center m-1 w-100">
+              <mat-select class="w-100" [(ngModel)]="sizeSelected">
+                <mat-option
+                  selected
+                  [value]="item.size"
+                  *ngFor="let item of data?.distinctSize"
+                >
+                  size: {{ item.size }}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+
+          <div class="d-flex v-align-middle mt-1 w-100">
+            <div class="justify-flex-center-center m-1 w-100">
+              <mat-select
+                class="w-100"
+                (selectionChange)="selectSize($event)"
+                [(ngModel)]="colorSelected"
+              >
+                <ng-container *ngFor="let item of data?.sizeExists">
+                  <mat-option
+                    selected
+                    [value]="item"
+                    *ngIf="item?.size === sizeSelected"
+                  >
+                    {{ item.color }}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </div>
+          </div>
+          <div></div>
           <div *ngIf="basketCount === 0">
-            <button (click)="increaseBsket()" mat-raised-button class="big-btn">
+            <button
+              (click)="increaseBsket()"
+              mat-raised-button
+              class="big-btn"
+              [disabled]="ceilOfRequest === 0"
+            >
               <span *ngIf="!waitToAddToBasket"> افزودن به سبد حرید </span>
               <span *ngIf="waitToAddToBasket">
-                <img src="../../../assets/img/loading.gif" class="small-icon mr-auto" />
+                <img
+                  src="../../../assets/img/loading.gif"
+                  class="small-icon mr-auto"
+                />
               </span>
             </button>
           </div>
           <div *ngIf="basketCount > 0">
             <span *ngIf="waitToAddToBasket">
-              <img src="../../../assets/img/loading.gif" class="small-icon mr-auto" />
+              <img
+                src="../../../assets/img/loading.gif"
+                class="small-icon mr-auto"
+              />
             </span>
 
             <div
@@ -221,7 +266,9 @@
             >
               <span (click)="decreaseBsket()">-</span>
               <span>{{ basketCount }}</span>
-              <span (click)="increaseBsket()"> +</span>
+              <span (click)="increaseBsket()" *ngIf="ceilOfRequest > 0">
+                +</span
+              >
             </div>
           </div>
         </div>

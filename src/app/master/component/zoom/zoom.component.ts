@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
-import { actions } from 'src/app/+state/action';
-import { selectZoom } from 'src/app/+state/select';
 import { DynamicVariableService } from 'src/app/service/dynamic.variables.services';
 @Component({
   selector: 'app-zoom',

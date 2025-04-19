@@ -183,9 +183,14 @@ export class ApiService {
       this.baseUrl + 'id=7&postid=' + postId + '&ts=' + timestap
     );
   }
-  submitNewPost(formValues: any, formData: any) {
+  submitNewPost(formValues: any, formData: any, existsSet: any) {
+    const existsSetString = JSON.stringify(existsSet);
+
+    console.log(
+      `https://burjcrown.com/drm/mall/index.php?id=6&existsSet=${existsSetString}&userid=${formValues.userEmail}&category=${formValues.category}&groupid=${formValues.group}&title=${formValues.title}&content=${formValues.content}&color=${formValues.color}&brand=${formValues.brand}&&sizes=${formValues.sizes}&&price=${formValues.price}&&material=${formValues.material}&sx=${formValues.sx}&scent=${formValues.scent}&country=${formValues.country}&discount=${formValues.discount}`
+    );
     return this.http.post(
-      `https://burjcrown.com/drm/mall/index.php?id=6&userid=${formValues.userEmail}&category=${formValues.category}&groupid=${formValues.group}&title=${formValues.title}&content=${formValues.content}&color=${formValues.color}&brand=${formValues.brand}&&sizes=${formValues.sizes}&&price=${formValues.price}&&material=${formValues.material}&sx=${formValues.sx}&scent=${formValues.scent}&country=${formValues.country}&discount=${formValues.discount}`,
+      `https://burjcrown.com/drm/mall/index.php?id=6&existsSet=${existsSetString}&userid=${formValues.userEmail}&category=${formValues.category}&groupid=${formValues.group}&title=${formValues.title}&content=${formValues.content}&color=${formValues.color}&brand=${formValues.brand}&&sizes=${formValues.sizes}&&price=${formValues.price}&&material=${formValues.material}&sx=${formValues.sx}&scent=${formValues.scent}&country=${formValues.country}&discount=${formValues.discount}`,
       formData
     );
   }
@@ -216,6 +221,7 @@ export class ApiService {
     user: string,
     productID: string,
     size: string,
+    color: string,
     count: number
   ) {
     return this.http.get(
@@ -226,6 +232,8 @@ export class ApiService {
         productID +
         '&size=' +
         size +
+        '&color=' +
+        color +
         '&count=' +
         count
     );

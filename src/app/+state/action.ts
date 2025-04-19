@@ -8,6 +8,7 @@ export const actions = createActionGroup({
       user: string;
       productID: string;
       size: string;
+      color: string;
       count: number;
     }>(),
     'load basket': props<{ basket: IBasket[] }>(),
@@ -63,7 +64,7 @@ export const actions = createActionGroup({
     'zoom post': props<{ post: any }>(),
     'prepare to zoom post': props<{ id: any }>(),
     'submit post': emptyProps(),
-    'prepare to submit post': props<{ formValues: any; formData: any }>(),
+    'prepare to submit post': props<{ formValues: any; formData: any ,existsSet:any}>(),
     'submit comment': props<{ comment: IComments[]; postId: any }>(),
     'prepare to submit comment': props<{
       comment: any;

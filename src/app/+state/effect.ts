@@ -12,12 +12,14 @@ export class storeEffects {
       ofType(actions.preparingAddRemoveBasket),
       switchMap((res: any) => {
         return this.apiService
-          .addRemoveBasket(res.user, res.productID, res.size, res.count)
-          .pipe(
-            map((res2: any) =>
-              actions.loadComment({ comments: res2, postId: res.postId })
-            )
-          );
+          .addRemoveBasket(
+            res.user,
+            res.productID,
+            res.size,
+            res.color,
+            res.count
+          )
+          .pipe(map((res2: any) => actions.loadBasket({ basket: res2 })));
       })
     );
   });
@@ -278,7 +280,7 @@ export class storeEffects {
       ofType(actions.prepareToSubmitPost),
       switchMap((res: any) => {
         return this.apiService
-          .submitNewPost(res.formValues, res.formData)
+          .submitNewPost(res.formValues, res.formData,res.existsSet)
           .pipe(map((result: any) => actions.submitPost()));
       })
     );

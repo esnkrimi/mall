@@ -3,9 +3,9 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-function isExistsInBasket($con, $user, $productID)
+function isExistsInBasket($con, $user, $productID, $size, $color)
 {
-    $sql = "SELECT * FROM basket where userid=$user,expid=$productID";// echo $sql;
+    $sql = "SELECT * FROM basket where userid='$user'and expid=$productID and color='$color' and size='$size'";// echo $sql;
     if ($result = $con->QUERY_RUN($con, $sql)) {
         $rows = $result->fetch_object();
         if ($rows->id)
@@ -17,22 +17,25 @@ function addremoveBasket($con)
 {
     $user = $_GET['user'];
     $productID = $_GET['productID'];
+    $color = $_GET['color'];
     $size = $_GET['size'];
     $count = $_GET['count'];
     $resultArray = array();
     $tempArray = array();
+    $id = $con->GET_MAX_COL('basket', 'id');
+
     if ($count > 0)
-        $condCount = 'count=count-1';
-    else
         $condCount = 'count=count+1';
-    if (isExistsInBasket($con, $user, $productID))
-        $sql = "update basket set " . $condCount . " where userid='$user' and expid=$productID"; // echo $sql;
     else
-        $sql = "insert into basket values($id,$productID,$count,$size,$user)"; // echo $sql;
+        $condCount = 'count=count-1';
+    if (isExistsInBasket($con, $user, $productID, $size, $color))
+        $sql = "update basket set " . $condCount . " where userid='$user' and expid=$productID and color='$color' and size='$size'"; // echo $sql;
+    else
+        $sql = "insert into basket values($id,$productID,$count,'$size','$color','$user')"; //echo $sql;
     $result = $con->QUERY_RUN($con, $sql);
     $sql = "delete from basket where count<=0"; // echo $sql;
     $result = $con->QUERY_RUN($con, $sql);
-    loadBasketByParameter($user);
+    loadBasketByParameter($con, $user);
 }
 
 function loadBasketByParameter($con, $user)
@@ -775,6 +778,8 @@ function fetch_one_experiences($con)
             $row->typeofpost = strcmp($row->typeofpost, 'female') == 0 ? 'خانم' : 'آقا';
             $row->saves = fetchSavesByPostid($con, $row->id);
             $row->score = ceil((count($row->saves) * 2 + count($row->likes) * 3 + $row->scorezoom * 0.3) / 200);
+            $row->sizeExists = exploding($con, $postid);
+            $row->distinctSize = distinctSize($con, $postid);
             $row->viewCount = $row->scorezoom;
 
 
@@ -785,6 +790,32 @@ function fetch_one_experiences($con)
     if (strlen($t) != 2)
         echo $t;
 }
+
+function distinctSize($con, $postid)
+{
+    $tempArray = array();
+    $sql = "SELECT distinct size FROM expexists where expid=$postid"; // echo $sql;
+    if ($result = $con->QUERY_RUN($con, $sql)) {
+        while ($row = $result->fetch_object()) {
+            array_push($tempArray, $row);
+        }
+    }
+    return $tempArray;
+}
+
+function exploding($con, $postid)
+{
+    $tempArray = array();
+    $sql = "SELECT * FROM expexists where expid=$postid"; // echo $sql;
+    if ($result = $con->QUERY_RUN($con, $sql)) {
+        while ($row = $result->fetch_object()) {
+            array_push($tempArray, $row);
+        }
+    }
+    return $tempArray;
+}
+
+
 function fetchGroupByGroupid($con, $groupid)
 {
     $sql = "SELECT * FROM groups where id=$groupid";//echo $sql;
@@ -842,15 +873,23 @@ function submitPost($con)
     $scent = $_GET['scent'];
     $country = $_GET['country'];
     $discount = $_GET['discount'];
+    $existsSet = $_GET['existsSet'];
+    $existsSetobj = json_decode($existsSet, true);
 
     $date = date("YmdHis");
     $expid = $con->GET_MAX_COL('exp', 'id');
-
-
-
-    $sql = "insert into exp values($expid,$userid,$groupid,'$title','$content','$date',1,'$color','$brand','$sizes','$price','$material','$sx','$scent','$country','$discount')";
-    echo $sql;
+    $sql = "insert into exp values($expid,$userid,$groupid,'$title','$content','$date',1,'$brand','$price','$material','$sx','$scent','$country','$discount')";
     $con->QUERY_RUN($con, $sql);
+
+    for ($t = 0; $t < count($existsSetobj); $t++) {
+        $expexsid = $con->GET_MAX_COL('expexists', 'id');
+        $size_ = $existsSetobj[$t]['size'];
+        $color_ = $existsSetobj[$t]['color'];
+        $count_ = $existsSetobj[$t]['count'];
+        $sql = "insert into expexists values($expexsid,$expid,'$size_','$color_','$count_')";
+        echo $sql;
+        $con->QUERY_RUN($con, $sql);
+    }
     for ($i = 0; $i < count($cat); $i++) {
         $id = $con->GET_MAX_COL('exp_category', 'id');
         $catId = findCatIdByName($con, $cat[$i]);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 18, 2025 at 04:59 PM
+-- Generation Time: Apr 19, 2025 at 01:39 PM
 -- Server version: 5.7.43-log
 -- PHP Version: 8.1.32
 
@@ -32,6 +32,7 @@ CREATE TABLE `basket` (
   `expid` int(11) NOT NULL,
   `count` int(11) NOT NULL,
   `size` text NOT NULL,
+  `color` text NOT NULL,
   `userid` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -39,9 +40,11 @@ CREATE TABLE `basket` (
 -- Dumping data for table `basket`
 --
 
-INSERT INTO `basket` (`id`, `expid`, `count`, `size`, `userid`) VALUES
-(1, 1, 5, '2xl', 'esnkrimi@gmail.com'),
-(2, 2, 3, '2xl', 'esnkrimi@gmail.com');
+INSERT INTO `basket` (`id`, `expid`, `count`, `size`, `color`, `userid`) VALUES
+(1, 3, 1, '2x', 'green', '9188108019'),
+(2, 3, 3, '3x', 'blue', '9188108019'),
+(3, 1, 2, '2x', 'green', '9188108019'),
+(4, 1, 1, '2x', 'yellow', '9188108019');
 
 -- --------------------------------------------------------
 
@@ -63,7 +66,9 @@ INSERT INTO `category` (`id`, `name`, `active`) VALUES
 (1, 'تند', 1),
 (2, 'جذاب', 1),
 (3, 'tond', 1),
-(4, 'shirin', 1);
+(4, 'shirin', 1),
+(5, 'test', 1),
+(6, 't1', 1);
 
 -- --------------------------------------------------------
 
@@ -975,9 +980,7 @@ CREATE TABLE `exp` (
   `content` blob NOT NULL,
   `date` text,
   `confirm` int(11) DEFAULT NULL,
-  `color` text NOT NULL,
   `brand` text NOT NULL,
-  `sizes` text NOT NULL,
   `price` int(11) NOT NULL,
   `material` text NOT NULL,
   `sx` text NOT NULL,
@@ -990,14 +993,43 @@ CREATE TABLE `exp` (
 -- Dumping data for table `exp`
 --
 
-INSERT INTO `exp` (`id`, `userid`, `groupid`, `title`, `content`, `date`, `confirm`, `color`, `brand`, `sizes`, `price`, `material`, `sx`, `scent`, `country`, `discount`) VALUES
-(1, 1, 1, 'بروت', '', '20250416153058', 1, 'green,blue', 'brandBrut', '2x,3x', 25, 'ج۱', 'women', 'گ۲', 'Germany', 5),
-(2, 1, 1, 'Azzaro', '', '20250416153236', 1, 'red,yellow', 'brandBrut', '2x,4x', 25000000, 'ج۱', 'women', 'گ۲', 'Japan', 5),
-(3, 1, 1, 'بروت', '', '20250416153058', 1, 'green,blue', 'brandBrut', '2x,3x', 25, 'ج۱', 'women', 'گ۲', 'Spain', 5),
-(4, 1, 1, 'لالیک', '', '20250416153058', 1, 'green,blue', 'brandBrut', '2x,3x', 25, 'ج۱', 'women', 'گ۲', 'Usa', 5),
-(5, 1, 1, 'Tomford', '', '20250416153058', 1, 'green,blue', 'brandBrut', '2x,3x', 25, 'ج۱', 'women', 'گ۲', 'Sweden', 5),
-(6, 1, 1, 'Adidas', '', '20250416153058', 1, 'green,blue', 'brandBrut', '2x,3x', 25, 'ج۱', 'women', 'گ۲', 'Sweden', 5),
-(7, 1, 1, 'Amitis', '', '20250416153058', 1, 'green,blue', 'brandBrut', '2x,3x', 25, 'ج۱', 'women', 'گ۲', 'Switzerland', 5);
+INSERT INTO `exp` (`id`, `userid`, `groupid`, `title`, `content`, `date`, `confirm`, `brand`, `price`, `material`, `sx`, `scent`, `country`, `discount`) VALUES
+(1, 1, 1, 't1', 0x323232, '20250419140850', 1, 'br1', 10, 'ج۱', 'women', 'گ۱', 'Germany', 5),
+(2, 1, 1, 't1', 0x323232, '20250419140851', 1, 'br1', 10, 'ج۱', 'women', 'گ۱', 'Germany', 5),
+(3, 1, 1, 't1', 0x323232, '20250419140851', 1, 'br1', 10, 'ج۱', 'women', 'گ۱', 'Germany', 5),
+(4, 1, 1, 't1', 0x323232, '20250419140852', 1, 'br1', 10, 'ج۱', 'women', 'گ۱', 'Germany', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expexists`
+--
+
+CREATE TABLE `expexists` (
+  `id` int(11) NOT NULL,
+  `expid` int(11) NOT NULL,
+  `size` text NOT NULL,
+  `color` text NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `expexists`
+--
+
+INSERT INTO `expexists` (`id`, `expid`, `size`, `color`, `count`) VALUES
+(1, 1, '2x', 'green', 1),
+(2, 1, '2x', 'blue', 1),
+(3, 1, '2x', 'yellow', 2),
+(4, 2, '2x', 'green', 1),
+(5, 2, '3x', 'green', 1),
+(6, 2, '4x', 'yellow', 2),
+(7, 3, '2x', 'green', 1),
+(8, 3, '3x', 'green', 1),
+(9, 3, '4x', 'yellow', 2),
+(10, 4, '2x', 'green', 1),
+(11, 4, '3x', 'green', 1),
+(12, 4, '4x', 'yellow', 2);
 
 -- --------------------------------------------------------
 
@@ -1016,11 +1048,10 @@ CREATE TABLE `exp_category` (
 --
 
 INSERT INTO `exp_category` (`id`, `expid`, `catid`) VALUES
-(1, 1, 3),
-(2, 2, 4),
-(3, 3, 4),
-(4, 4, 4),
-(5, 5, 4);
+(1, 1, 6),
+(2, 2, 6),
+(3, 3, 6),
+(4, 4, 6);
 
 -- --------------------------------------------------------
 
@@ -1367,6 +1398,12 @@ ALTER TABLE `comment`
 -- Indexes for table `exp`
 --
 ALTER TABLE `exp`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expexists`
+--
+ALTER TABLE `expexists`
   ADD PRIMARY KEY (`id`);
 
 --
