@@ -167,7 +167,6 @@ export class PostComponent implements OnChanges, AfterViewInit {
       .select(selectZoom)
       .pipe(map((res: any) => res.filter((res: any) => res.id === postid)))
       .subscribe((r) => {
-        console.log(this.data);
         this.data = r[r.length - 1];
         this.sizeSelected = this.data?.sizes[0];
         this.colorSelected = this.data?.color[0];
@@ -220,7 +219,9 @@ export class PostComponent implements OnChanges, AfterViewInit {
     );
   }
   loadBasketSelect() {
-    this.store.select(selectBasket).subscribe((res) => console.log(res));
+    this.store.select(selectBasket).subscribe((res) => {
+      //console.log(res)
+    });
   }
   loadBsketAction(user: string) {
     this.store.dispatch(

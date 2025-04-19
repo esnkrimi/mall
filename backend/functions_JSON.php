@@ -980,7 +980,7 @@ function searchPostByWord($con)
     else {
         $resultArray = array();
         $tempArray = array();
-        $sql = "select * from user where trim(lower(name)) like '%$word1%' or trim(lower(family)) like '%$word1%' or trim(lower(email)) like '%$word1%' ";//echo $sql;
+        $sql = "select * from exp where trim(lower(title)) like '%$word1%' or trim(lower(title)) like '%$word1%' or trim(lower(brand)) like '%$word1%' ";//echo $sql;
         if ($result = $con->QUERY_RUN($con, $sql)) {
             while ($row = $result->fetch_object()) {
                 $tempArray = $row;
@@ -989,6 +989,7 @@ function searchPostByWord($con)
                 $row->likes = fetchLikesByPostid($con, $row->id);
                 $row->saves = fetchSavesByPostid($con, $row->id);
                 $row->title = replaceColorize($row->title, $word);
+                $row->brand = replaceColorize($row->brand, $word);
                 $row->content = replaceColorize($row->content, $word);
                 $row->category = fetch_experiences_categories($con, $row->id);
                 array_push($resultArray, $row);

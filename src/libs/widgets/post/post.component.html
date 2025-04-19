@@ -235,7 +235,10 @@
               </mat-select>
             </div>
           </div>
-          <div></div>
+          <div *ngIf="ceilOfRequest > 0" class="pb-2">
+            <span>موجودی باقیمانده</span>
+            <span> {{ ceilOfRequest }}</span>
+          </div>
           <div *ngIf="basketCount === 0">
             <button
               (click)="increaseBsket()"
@@ -266,7 +269,8 @@
             >
               <span (click)="decreaseBsket()">-</span>
               <span>{{ basketCount }}</span>
-              <span (click)="increaseBsket()" *ngIf="ceilOfRequest > 0">
+              <span (click)="increaseBsket()" *ngIf="ceilOfRequest > 0">+</span>
+              <span class="text-light-muted" *ngIf="ceilOfRequest === 0">
                 +</span
               >
             </div>

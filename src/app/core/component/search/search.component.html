@@ -13,25 +13,27 @@
         *ngIf="loadingProgressDynamicVar === 'autocomplete'"
       ></app-loadingProgressDynamic>
       <div
-        (click)="gotoRouteWithDelay('feature/userBoard/' + item?.email)"
+        (click)="gotoRouteWithDelay('feature/zoom/' + item?.id)"
         *ngFor="let item of searchPool"
         class="p-2 text-right cursor-pointer rounded"
       >
         <ng-container *ngIf="item && item.id">
           <div class="d-flex flex-nowrap search-result-container w-100">
             <div>
-              <p>{{ item.name }} {{ item.family }}</p>
+              <p [innerHtml]="item.title"></p>
+              <p [innerHtml]="item.brand"></p>
               <p class="p-2 text-light text-smalls">
-                <span class="p-1">{{ item.email | titlecase }}</span>
+                <span class="p-1">{{ item.price }}</span>
               </p>
             </div>
             <div>
               <span>
                 <img
                   [src]="
-                    'https://burjcrown.com/drm/mall/users/' +
-                    item?.email +
-                    '/user.jpg'
+                    'https://burjcrown.com/drm/mall/users/9188108019' 
+                    +'/' +
+                    item?.id +
+                    '/1.jpg'
                   "
                   onerror="this.src = '../../../../assets/img/unknown-user.png'"
                   class="m-2 rounded cursor-pointer small-image"

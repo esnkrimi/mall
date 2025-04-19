@@ -82,6 +82,7 @@ export class SearchComponent implements OnInit {
   listenToSearchPool() {
     this.store.select(selectSearchPool).subscribe((res: any) => {
       this.searchPool = res;
+      console.log(res)
       if (res[0]?.success === 'reset') this.searchPool = [];
       this.loadingProgressDynamicService.loadingProgressDeactiveation(200);
     });
